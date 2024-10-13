@@ -9,7 +9,7 @@ from email.mime.text import MIMEText
 app = Flask(__name__)
 
 # Initialize MongoDB Client
-mongo_client = MongoClient("your_mongodb_connection_string")
+mongo_client = MongoClient("mongodb+srv://<db_username>:<db_password>@cluster0.cjyqt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 db = mongo_client["your_database_name"]
 
 # GCP Configuration
