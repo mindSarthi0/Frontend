@@ -24,7 +24,7 @@ const Question: React.FC<QuestionProps> = ({ question, onAnswerSelect }) => {
       </div>
       {/* Container for the 7 circular buttons */}
       <div className="flex space-x-4">
-        {Array.from({ length: 7 }).map((_, index) => (
+        {Array.from({ length: 5 }).map((_, index) => (
           <button
             key={index}
             onClick={() => handleButtonClick(index)}
