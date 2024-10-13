@@ -8,7 +8,7 @@ import vertexai
 from vertexai.generative_models import GenerativeModel
 
 app = Flask(__name__)
-
+#
 # Initialize MongoDB Client
 mongo_client = MongoClient("mongodb+srv://cognify:dEQGVwIY24QzdUu6@cluster0.cjyqt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 db = mongo_client["cognify"]
