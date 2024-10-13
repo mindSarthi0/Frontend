@@ -1,24 +1,24 @@
 from flask import Flask, request, jsonify
 from pymongo import MongoClient
-from google.cloud import aiplatform
 from fpdf import FPDF
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import vertexai
+from vertexai.generative_models import GenerativeModel
 
 app = Flask(__name__)
 
 # Initialize MongoDB Client
-mongo_client = MongoClient("mongodb+srv://<db_username>:<db_password>@cluster0.cjyqt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+mongo_client = MongoClient("your_mongodb_connection_string")
 db = mongo_client["your_database_name"]
 
 # GCP Configuration
-PROJECT_ID = 'your-project-id'
+PROJECT_ID = 'your-project-id'  # Update with your project ID
 LOCATION = 'us-central1'  # Change as needed
-MODEL_ID = 'your-model-id'
 
 # Initialize Vertex AI
-aiplatform.init(project=PROJECT_ID, location=LOCATION)
+vertexai.init(project=PROJECT_ID, location=LOCATION)
 
 # Function to fetch data from MongoDB
 def fetch_data_from_mongo(user_id):
@@ -44,12 +44,14 @@ def generate_report_text_with_vertex_ai(data):
     Continue for the other domains...
     """
 
-    # Call the LLM to generate text
-    model = aiplatform.Model(MODEL_ID)
-    response = model.predict(instances=[{"content": prompt}])
-    
+    # Create a GenerativeModel instance
+    model = GenerativeModel("gemini-1.5-flash-002")
+
+    # Generate content using the model
+    response = model.generate_content(prompt)
+
     # Extract the generated text
-    report_text = response.predictions[0]['content']
+    report_text = response.text
     return report_text
 
 # Function to generate a PDF from the report text
