@@ -10,8 +10,8 @@ from vertexai.generative_models import GenerativeModel
 app = Flask(__name__)
 
 # Initialize MongoDB Client
-mongo_client = MongoClient("your_mongodb_connection_string")
-db = mongo_client["your_database_name"]
+mongo_client = MongoClient("mongodb+srv://cognify:dEQGVwIY24QzdUu6@cluster0.cjyqt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+db = mongo_client["cognify"]
 
 # GCP Configuration
 PROJECT_ID = 'your-project-id'  # Update with your project ID
