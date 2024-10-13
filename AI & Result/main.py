@@ -1,41 +1,112 @@
 from flask import Flask, request, jsonify
-from google.cloud import language_v1
-from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
-import os
+from pymongo import MongoClient
+from google.cloud import aiplatform
+from fpdf import FPDF
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 app = Flask(__name__)
 
-# Initialize Google Natural Language API client
-client = language_v1.LanguageServiceClient()
+# Initialize MongoDB Client
+mongo_client = MongoClient("your_mongodb_connection_string")
+db = mongo_client["your_database_name"]
 
+# GCP Configuration
+PROJECT_ID = 'your-project-id'
+LOCATION = 'us-central1'  # Change as needed
+MODEL_ID = 'your-model-id'
+
+# Initialize Vertex AI
+aiplatform.init(project=PROJECT_ID, location=LOCATION)
+
+# Function to fetch data from MongoDB
+def fetch_data_from_mongo(user_id):
+    result = db.assessments.find_one({"user_id": user_id})
+    return result
+
+# Function to generate report text using Google Cloud LLM
+def generate_report_text_with_vertex_ai(data):
+    # Prepare your prompt
+    prompt = f"""
+    Use the following data to create a one-pager personalized report for each domain. 
+    Include subtopics like Career, Relationships, Strengths, and Vulnerabilities:
+    
+    Domain: Neuroticism = {data['neuroticism']['level']}
+    Subdomains: 
+    - Anxiety: {data['neuroticism']['subdomains']['anxiety']}
+    - Anger: {data['neuroticism']['subdomains']['anger']}
+    - Depression: {data['neuroticism']['subdomains']['depression']}
+    - Self-consciousness: {data['neuroticism']['subdomains']['self-consciousness']}
+    - Immoderation: {data['neuroticism']['subdomains']['immoderation']}
+    - Vulnerability: {data['neuroticism']['subdomains']['vulnerability']}
+    
+    Continue for the other domains...
+    """
+
+    # Call the LLM to generate text
+    model = aiplatform.Model(MODEL_ID)
+    response = model.predict(instances=[{"content": prompt}])
+    
+    # Extract the generated text
+    report_text = response.predictions[0]['content']
+    return report_text
+
+# Function to generate a PDF from the report text
+def generate_pdf(report_text):
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
+    
+    # Split report text into lines and add to PDF
+    for line in report_text.split('\n'):
+        pdf.cell(200, 10, txt=line, ln=True)
+    
+    pdf_filename = "report.pdf"
+    pdf.output(pdf_filename)
+    return pdf_filename
+
+# Function to send email with the PDF attachment
+def send_email_with_pdf(pdf_filename, client_email):
+    # Email configuration
+    sender_email = "your_email@example.com"
+    sender_password = "your_email_password"
+    
+    # Set up the email
+    msg = MIMEMultipart()
+    msg['From'] = sender_email
+    msg['To'] = client_email
+    msg['Subject'] = "Your Psychological Assessment Report"
+    
+    body = "Please find attached your psychological assessment report."
+    msg.attach(MIMEText(body, 'plain'))
+    
+    # Attach the PDF
+    with open(pdf_filename, "rb") as attachment:
+        msg.attach(MIMEText(attachment.read(), 'pdf'))
+    
+    # Send the email
+    with smtplib.SMTP('smtp.gmail.com', 587) as server:
+        server.starttls()
+        server.login(sender_email, sender_password)
+        server.send_message(msg)
+
+# Endpoint to process the form submission
 @app.route('/process', methods=['POST'])
 def process_form():
     form_data = request.json['form_data']
-    result_text = analyze_result(form_data)
-    pdf_filename = generate_pdf(result_text)
+    result_data = fetch_data_from_mongo(form_data['user_id'])  # Fetch data from MongoDB
 
-    # Here you can implement email logic to send the PDF (e.g., using SendGrid)
-    send_email_with_pdf(pdf_filename)
+    # Generate report text using Google Cloud LLM
+    report_text = generate_report_text_with_vertex_ai(result_data)
+
+    # Generate the PDF from the report text
+    pdf_filename = generate_pdf(report_text)
+
+    # Send the PDF to the client via email
+    send_email_with_pdf(pdf_filename, form_data['client_email'])
     
-    return jsonify({"message": "Success! Report generated and sent via email."})
-
-def analyze_result(form_data):
-    document = language_v1.Document(content=form_data, type_=language_v1.Document.Type.PLAIN_TEXT)
-    response = client.analyze_sentiment(document=document)
-    sentiment = response.document_sentiment
-    return f"Sentiment Score: {sentiment.score}, Sentiment Magnitude: {sentiment.magnitude}"
-
-def generate_pdf(result_text):
-    pdf_filename = 'report.pdf'
-    c = canvas.Canvas(pdf_filename, pagesize=letter)
-    c.drawString(100, 750, result_text)  # Customize as needed
-    c.save()
-    return pdf_filename
-
-def send_email_with_pdf(pdf_filename):
-    # Logic to send email (use SendGrid or Gmail API)
-    pass
+    return jsonify({"message": "Report generated and sent via email."})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run(debug=True)
