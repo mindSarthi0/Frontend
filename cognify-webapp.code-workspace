@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "cognify-webapp",
+			"path": "."
+		},
+		{
+			"name": "cognify-api-gateway",
+			"path": "../cognify-api-gateway"
+		}
+	],
+	"settings": {}
+}
