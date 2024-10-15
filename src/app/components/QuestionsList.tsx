@@ -5,15 +5,6 @@ import Question from "./Question";
 const QuestionsList: React.FC<object> = () => {
   // Fetch questions here
 
-  return (
-    <div>
-      <Question
-        question={"Title"}
-        onAnswerSelect={() => {
-          alert();
-        }}
-      />
-    </div>
-  );
+  return <div></div>;
 };
 export default QuestionsList;

@@ -19,27 +19,29 @@ const Question: React.FC<QuestionProps> = ({ question, onAnswerSelect }) => {
       {/* Question text */}
       <p className="text-center text-lg mb-4">{question}</p>
 
-      <div>
-        <h1>Agree</h1>
-      </div>
-      {/* Container for the 7 circular buttons */}
-      <div className="flex space-x-4">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <button
-            key={index}
-            onClick={() => handleButtonClick(index)}
-            className={`w-12 h-12 rounded-full border-2 flex items-center justify-center ${
-              selectedIndex === index
-                ? "border-purple-600" // Style when selected
-                : "border-gray-400" // Default style
-            }`}
-          >
-            {/* Optional content inside buttons (index can be shown if needed) */}
-          </button>
-        ))}
-      </div>
-      <div>
-        <h1>Disagree</h1>
+      <div className="flex items-center">
+        <div>
+          <h1 className="mr-4">Agree</h1>
+        </div>
+        {/* Container for the 7 circular buttons */}
+        <div className="flex space-x-4">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => handleButtonClick(index)}
+              className={`w-12 h-12 rounded-full border-2 flex items-center justify-center ${
+                selectedIndex === index
+                  ? "border-purple-600" // Style when selected
+                  : "border-gray-400" // Default style
+              }`}
+            >
+              {/* Optional content inside buttons (index can be shown if needed) */}
+            </button>
+          ))}
+        </div>
+        <div>
+          <h1 className="ml-4">Disagree</h1>
+        </div>
       </div>
     </div>
   );
