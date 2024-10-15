@@ -4,6 +4,8 @@ import Section from "./components/Section";
 import { useEffect, useState } from "react";
 import ContactProps from "./components/ContactForm";
 import Question from "./components/Question";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 interface Question {
   id: number;
@@ -12,13 +14,6 @@ interface Question {
 
 export default function Home() {
   const [questions, setQuestions] = useState([]);
-
-  // const [user, userDetails] = useState({
-  //   name: "",
-  //   email: "",
-  //   phone: "",
-  //   age: "",
-  // });
 
   const [answers, setAnswers] = useState({});
 
@@ -52,27 +47,32 @@ export default function Home() {
   }
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="">
+      <h1 className="text-center text-3xl font-bold mb-8">
+        We are student of DU University. This website is under progress
+        7004585502
+      </h1>
       <Popup
         isOpen={popupData.isOpen}
         onClose={() => setPopupDate({ ...popupData, isOpen: false })}
-        wrapperClass="p-[8px]"
-        ctaName={""}
+        wrapperClass="p-[16px]"
       >
         <div>
           <ContactProps
             // onSubmit={() => {}}
+            answers={Object.values(answers)}
             onSuccess={function (): void {
               throw new Error("Function not implemented.");
             }}
             onFailed={function (): void {
               throw new Error("Function not implemented.");
             }}
+            backendApi={"http://localhost:8080"}
           />
         </div>
       </Popup>
-
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+      <Header />
+      <main className="flex flex-col justify-center">
         <Section withMaxWidth>
           {questions.map((item: Question) => {
             return (
@@ -85,7 +85,7 @@ export default function Home() {
                         ...prevState,
                         [item.id]: {
                           id: item.id,
-                          answer: index + 1,
+                          answer: index + 1 + "",
                         },
                       };
                     });
@@ -94,7 +94,7 @@ export default function Home() {
               </div>
             );
           })}
-          <div>
+          <div className="flex justify-center">
             <button
               className="bg-[#0066FF] text-white px-8 py-4 rounded-lg"
               onClick={onClickHandler}
@@ -103,7 +103,9 @@ export default function Home() {
             </button>
           </div>
         </Section>
+        <section className="mb-8"></section>
       </main>
+      <Footer />
     </div>
   );
 }

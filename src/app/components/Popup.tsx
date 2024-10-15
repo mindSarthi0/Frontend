@@ -5,7 +5,7 @@ interface PopupProps {
   onClose: () => void;
   children: React.ReactNode;
   wrapperClass?: string;
-  ctaName: string;
+  ctaName?: string;
 }
 
 const Popup: React.FC<PopupProps> = ({
@@ -34,14 +34,16 @@ const Popup: React.FC<PopupProps> = ({
         <div className="popup-content">{children}</div>
 
         {/* CTA Button */}
-        <div className="flex justify-end mt-4">
-          <button
-            onClick={onClose}
-            className="bg-[#54A4DF] text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
-          >
-            {ctaName}
-          </button>
-        </div>
+        {ctaName && (
+          <div className="flex justify-end mt-4">
+            <button
+              onClick={onClose}
+              className="bg-[#54A4DF] text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+            >
+              {ctaName}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
