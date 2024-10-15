@@ -1,20 +1,24 @@
 "use client";
 import Popup from "./components/Popup";
-import QuestionsList from "./components/QuestionsList";
 import Section from "./components/Section";
 import { useEffect, useState } from "react";
 import ContactProps from "./components/ContactForm";
 import Question from "./components/Question";
 
+interface Question {
+  id: number;
+  question: string;
+}
+
 export default function Home() {
   const [questions, setQuestions] = useState([]);
 
-  const [user, userDetails] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    age: "",
-  });
+  // const [user, userDetails] = useState({
+  //   name: "",
+  //   email: "",
+  //   phone: "",
+  //   age: "",
+  // });
 
   const [answers, setAnswers] = useState({});
 
@@ -57,7 +61,7 @@ export default function Home() {
       >
         <div>
           <ContactProps
-            onSubmit={() => {}}
+            // onSubmit={() => {}}
             onSuccess={function (): void {
               throw new Error("Function not implemented.");
             }}
@@ -70,7 +74,7 @@ export default function Home() {
 
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Section withMaxWidth>
-          {questions.map((item: any, _) => {
+          {questions.map((item: Question) => {
             return (
               <div key={item.id} className="mb-8">
                 <Question
