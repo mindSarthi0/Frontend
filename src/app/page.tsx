@@ -24,6 +24,10 @@ export default function Home() {
     body: "",
   });
 
+  const [popupUserForm, setPopupUserForm] = useState({
+    isOpen: false,
+  });
+
   useEffect(() => {
     const getQuestions = async () => {
       const response = await fetch("http://localhost:8080/questions");
@@ -37,11 +41,8 @@ export default function Home() {
 
   function onClickHandler(): void {
     if (Object.keys(answers).length === questions.length) {
-      setPopupDate({
+      setPopupUserForm({
         isOpen: true,
-        title: "Thank you for your time",
-        titleClassName: "text-3xl",
-        body: "We will contact you soon",
       });
     }
   }
@@ -53,8 +54,8 @@ export default function Home() {
         7004585502
       </h1>
       <Popup
-        isOpen={popupData.isOpen}
-        onClose={() => setPopupDate({ ...popupData, isOpen: false })}
+        isOpen={popupUserForm.isOpen}
+        onClose={() => setPopupUserForm({ ...popupUserForm, isOpen: false })}
         wrapperClass="p-[16px]"
       >
         <div>
@@ -62,13 +63,31 @@ export default function Home() {
             // onSubmit={() => {}}
             answers={Object.values(answers)}
             onSuccess={function (): void {
-              throw new Error("Function not implemented.");
+              setPopupUserForm({
+                isOpen: false,
+              });
+              setPopupDate({
+                isOpen: true,
+                title: "Thank you for your time",
+                titleClassName: "text-3xl",
+                body: "You day will be full of Happiess",
+              });
             }}
             onFailed={function (): void {
-              throw new Error("Function not implemented.");
+              alert("Failed to submit: Check logs");
             }}
             backendApi={"http://localhost:8080"}
           />
+        </div>
+      </Popup>
+      <Popup
+        isOpen={popupData.isOpen}
+        onClose={() => setPopupDate({ ...popupData, isOpen: false })}
+        wrapperClass="p-[16px]"
+      >
+        <div>
+          <h1>{popupData.title}</h1>
+          <p>{popupData.body}</p>
         </div>
       </Popup>
       <Header />

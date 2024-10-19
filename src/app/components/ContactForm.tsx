@@ -15,8 +15,8 @@ interface ContactProps {
 const ContactForm: React.FC<ContactProps> = ({
   backendApi,
   answers,
-  // onSuccess,
-  // onFailed,
+  onSuccess,
+  onFailed,
 }) => {
   const [inputData, setInputData] = useState({
     name: "",
@@ -114,10 +114,10 @@ const ContactForm: React.FC<ContactProps> = ({
       })
       .then((result) => {
         console.log("Success:", result);
-        // onSuccess();
+        onSuccess();
       })
       .catch(() => {
-        // onFailed();
+        onFailed();
       });
     // Your logic for handling the button click goes here
   };
