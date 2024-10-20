@@ -1,7 +1,9 @@
+// page.tsx
+
 "use client";
 import Popup from "./components/Popup";
 import Section from "./components/Section";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ContactProps from "./components/ContactForm";
 import Question from "./components/Question";
 import Header from "./components/Header";
@@ -28,6 +30,9 @@ export default function Home() {
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // Track current question
 
+  // Create refs for each question
+  const questionRefs = useRef<Array<HTMLDivElement | null>>([]);
+
   useEffect(() => {
     const getQuestions = async () => {
       const response = await fetch("http://localhost:8080/questions");
@@ -39,13 +44,25 @@ export default function Home() {
   }, []);
 
   function handleAnswerSelect(selectedIndex: number, questionId: number) {
+    // Check if this question has already been answered
+    const alreadyAnswered = !!answers[questionId];
+
+    // Update the answer
     setAnswers((prevState) => ({
       ...prevState,
       [questionId]: { id: questionId, answer: selectedIndex + 1 + "" },
     }));
-    // Move to the next question after the current one is answered
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
+
+    // Move to the next question only if it's not already answered
+    if (!alreadyAnswered && currentQuestionIndex < questions.length - 1) {
+      const nextQuestionIndex = currentQuestionIndex + 1;
+      setCurrentQuestionIndex(nextQuestionIndex);
+
+      // Scroll to the next question and center it on the screen
+      questionRefs.current[nextQuestionIndex]?.scrollIntoView({
+        behavior: "smooth",
+        block: "center", // Center the question on the screen
+      });
     }
   }
 
@@ -55,23 +72,24 @@ export default function Home() {
     }
   }
 
-  // Calculate progress based on the current question number
-  const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+  // Calculate progress based on the number of answered questions
+  const answeredQuestionsCount = Object.keys(answers).length;
+  const progress = (answeredQuestionsCount / questions.length) * 100;
 
   return (
     <div className="">
       {/* Header with Background for "BIG 5 Personality Test" */}
       <h1
-        className="text-center text-6xl font-medium text-gray-800 mt-6 mb-6 tracking-normal"
+        className="text-center text-6xl font-medium text-gray-800  mb-6 tracking-normal"
         style={{
           backgroundColor: "#f0f0f0", // Light gray background
-          padding: "20px",            // Padding around the text
-          borderRadius: "8px",         // Rounded corners
+          padding: "20px", // Padding around the text
+          borderRadius: "8px", // Rounded corners
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Shadow for depth
-          fontFamily : "Calibri, sans-serif",
+          fontFamily: "lora",
         }}
       >
-        BIG 5 Personality Test
+        BIG 5 Personality Assessment
       </h1>
       <Popup
         isOpen={popupUserForm.isOpen}
@@ -105,10 +123,18 @@ export default function Home() {
       <main className="flex flex-col justify-center">
         <Section withMaxWidth>
           {questions.map((item: Question, index: number) => (
-            <div key={item.id} className={`mb-8 ${index !== currentQuestionIndex ? 'blur-sm' : ''}`}>
+            <div
+              key={item.id}
+              ref={(el) => (questionRefs.current[index] = el)} // Assign ref to each question
+              className={`mb-8 ${
+                index !== currentQuestionIndex ? "blur-sm" : ""
+              }`}
+            >
               <Question
                 question={item.question}
-                onAnswerSelect={(selectedIndex) => handleAnswerSelect(selectedIndex, item.id)}
+                onAnswerSelect={(selectedIndex) =>
+                  handleAnswerSelect(selectedIndex, item.id)
+                }
                 totalQuestions={questions.length}
                 currentQuestion={index + 1}
               />

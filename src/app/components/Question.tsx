@@ -1,3 +1,5 @@
+// question.tsx
+
 "use client";
 import React, { useState } from "react";
 
@@ -8,7 +10,12 @@ interface QuestionProps {
   currentQuestion: number; // Current question number
 }
 
-const Question: React.FC<QuestionProps> = ({ question, onAnswerSelect, totalQuestions, currentQuestion }) => {
+const Question: React.FC<QuestionProps> = ({
+  question,
+  onAnswerSelect,
+  totalQuestions,
+  currentQuestion,
+}) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const handleButtonClick = (index: number) => {
@@ -17,9 +24,9 @@ const Question: React.FC<QuestionProps> = ({ question, onAnswerSelect, totalQues
   };
 
   const colors = {
-    agree: "#37a576",    // Green for Agree
+    agree: "#37a576", // Green for Agree
     disagree: "#8c649c", // Purple for Disagree
-    neutral: "#acafb8",  // Gray for Neutral
+    neutral: "#acafb8", // Gray for Neutral
   };
 
   const getSizeClass = (index: number) => {
@@ -62,16 +69,22 @@ const Question: React.FC<QuestionProps> = ({ question, onAnswerSelect, totalQues
   };
 
   return (
-    <div className="flex flex-col items-center relative pb-16"> {/* Padding to avoid overlap with the footer */}
-      <p className="text-center text-3xl font-medium text-gray-600 mb-6 tracking-normal"  >
-      
-        {question}</p>
+    <div className="flex flex-col items-center relative pb-16">
+      {/* Padding to avoid overlap with the footer */}
+      <p className="text-center text-4xl font-medium text-gray-500 mb-12 mt-12 tracking-wider"
+      style={{fontFamily: "lora" }}>
+
+
+        {question} {/* Question Text  */}
+
+
+      </p>
 
       <div className="flex items-center">
         {/* Disagree Text with Calibri Bold */}
         <h1
-          className="mr-12 text-3xl font-medium tracking-wide"
-          style={{ color: colors.disagree, fontFamily: "Calibri, sans-serif"}}
+          className="mr-12 text-3xl font-medium tracking-wider"
+          style={{ color: colors.disagree, fontFamily: "lora" }}
         >
           Disagree
         </h1>
@@ -102,8 +115,8 @@ const Question: React.FC<QuestionProps> = ({ question, onAnswerSelect, totalQues
         </div>
         {/* Agree Text with Calibri Bold */}
         <h1
-          className="ml-12 text-3xl font-medium tracking-wide"
-          style={{ color: colors.agree, fontFamily: "Calibri, sans-serif" }}//fontWeight: "regular"
+          className="ml-12 text-3xl font-medium tracking-wider"
+          style={{ color: colors.agree, fontFamily:"lora" }}
         >
           Agree
         </h1>
