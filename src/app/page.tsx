@@ -75,22 +75,38 @@ export default function Home() {
   // Calculate progress based on the number of answered questions
   const answeredQuestionsCount = Object.keys(answers).length;
   const progress = (answeredQuestionsCount / questions.length) * 100;
-
+  
   return (
+    
     <div className="">
       {/* Header with Background for "BIG 5 Personality Test" */}
-      <h1
-        className="text-center text-6xl font-medium text-gray-800  mb-6 tracking-normal"
+      
+      <header
+        className="flex justify-center items-center relative text-center py-6 mb-6"
         style={{
-          backgroundColor: "#f0f0f0", // Light gray background
+          backgroundColor: "#35aede", // Light gray background
           padding: "20px", // Padding around the text
           borderRadius: "8px", // Rounded corners
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Shadow for depth
-          fontFamily: "lora",
+          fontFamily: "Lora",
+          position: "relative", // Required for positioning logo
         }}
       >
-        BIG 5 Personality Assessment
-      </h1>
+
+        {/* Logo on the top left */}
+        <img
+          src="/Logo.png" // Replace with the actual logo path
+          alt="Logo"
+          className="absolute top-3 left-4 w-20 h-20 object-contain" // Adjust size and position
+        />
+
+        
+        {/* Title in the center */}
+        <h1 className="text-6xl font-medium text-white mx-auto">
+          BIG 5 Personality Assessment
+        </h1>
+      </header>
+      
       <Popup
         isOpen={popupUserForm.isOpen}
         onClose={() => setPopupUserForm({ ...popupUserForm, isOpen: false })}
@@ -122,24 +138,31 @@ export default function Home() {
       <Header />
       <main className="flex flex-col justify-center">
         <Section withMaxWidth>
-          {questions.map((item: Question, index: number) => (
-            <div
-              key={item.id}
-              ref={(el) => (questionRefs.current[index] = el)} // Assign ref to each question
-              className={`mb-8 ${
-                index !== currentQuestionIndex ? "blur-sm" : ""
-              }`}
-            >
-              <Question
-                question={item.question}
-                onAnswerSelect={(selectedIndex) =>
-                  handleAnswerSelect(selectedIndex, item.id)
-                }
-                totalQuestions={questions.length}
-                currentQuestion={index + 1}
-              />
-            </div>
-          ))}
+        {
+  questions.map((item: Question, index: number) => (
+    <div
+      key={item.id}
+      ref={(el) => (questionRefs.current[index] = el)} // Assign ref to each question
+      className={`mb-8 ${
+        index !== currentQuestionIndex ? "blur-sm" : ""
+      }`}
+    >
+      <Question
+        question={item.question}
+        onAnswerSelect={(selectedIndex) =>
+          handleAnswerSelect(selectedIndex, item.id)
+        }
+        totalQuestions={questions.length}
+        currentQuestion={index + 1}
+      />
+      
+      {/* Fine Line to separate questions */}
+      {index !== questions.length - 1 && (
+        <hr className="my-8 border-gray-300" /> // Add this line
+      )}
+    </div>
+  ))
+}
           <div className="flex justify-center">
             <button
               className="bg-[#0066FF] text-white px-8 py-4 rounded-lg"

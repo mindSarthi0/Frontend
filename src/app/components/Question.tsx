@@ -88,7 +88,7 @@ const Question: React.FC<QuestionProps> = ({
         >
           Disagree
         </h1>
-        <div className="flex items-center space-x-12">
+        <div className="flex items-center space-x-16">
           {Array.from({ length: 5 }).map((_, index) => {
             const { backgroundColor, borderColor, color, hover } = getColorStyle(index);
             return (
