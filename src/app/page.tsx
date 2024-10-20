@@ -16,7 +16,7 @@ interface Question {
 
 export default function Home() {
   const [questions, setQuestions] = useState<Question[]>([]);
-  const [answers, setAnswers] = useState({});
+  const [answers, setAnswers] = useState<{ [key: number]: { id: number; answer: string } }>({});
   const [popupData, setPopupDate] = useState({
     isOpen: false,
     title: "",
@@ -87,7 +87,7 @@ export default function Home() {
           backgroundColor: "#35aede", // Light gray background
           padding: "20px", // Padding around the text
           borderRadius: "8px", // Rounded corners
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Shadow for depth
+          boxShadow: "0 6px 10px rgba(0, 0, 0, 0.1)", // Shadow for depth
           fontFamily: "Lora",
           position: "relative", // Required for positioning logo
         }}
@@ -142,7 +142,9 @@ export default function Home() {
   questions.map((item: Question, index: number) => (
     <div
       key={item.id}
-      ref={(el) => (questionRefs.current[index] = el)} // Assign ref to each question
+      ref={(el) => {
+        questionRefs.current[index] = el;
+      }} // Assign ref to each question
       className={`mb-8 ${
         index !== currentQuestionIndex ? "blur-sm" : ""
       }`}
