@@ -21,7 +21,7 @@ const Question: React.FC<QuestionProps> = ({ question, onAnswerSelect }) => {
 
       <div className="flex items-center">
         <div>
-          <h1 className="mr-4">Agree</h1>
+          <h1 className="mr-4">Disgree</h1>
         </div>
         {/* Container for the 7 circular buttons */}
         <div className="flex space-x-4">
@@ -40,7 +40,7 @@ const Question: React.FC<QuestionProps> = ({ question, onAnswerSelect }) => {
           ))}
         </div>
         <div>
-          <h1 className="ml-4">Disagree</h1>
+          <h1 className="ml-4">Agree</h1>
         </div>
       </div>
     </div>
