@@ -84,8 +84,8 @@ export default function Home() {
       <header
         className="flex justify-center items-center relative text-center py-6 mb-6"
         style={{
-          backgroundColor: "#35aede", // Light gray background
-          padding: "20px", // Padding around the text
+          backgroundColor: "#6c858d", // Light gray background
+          padding: "24px", // Padding around the text
           borderRadius: "8px", // Rounded corners
           boxShadow: "0 6px 10px rgba(0, 0, 0, 0.1)", // Shadow for depth
           fontFamily: "Lora",
@@ -95,9 +95,9 @@ export default function Home() {
 
         {/* Logo on the top left */}
         <img
-          src="/Logo.png" // Replace with the actual logo path
+          src="/logo3.png" // Replace with the actual logo path
           alt="Logo"
-          className="absolute top-3 left-4 w-20 h-20 object-contain" // Adjust size and position
+          className="absolute top-1 left-4 w-24 h-24 object-contain" // Adjust size and position
         />
 
         
