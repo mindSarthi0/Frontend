@@ -81,31 +81,56 @@ export default function Home() {
     <div className="">
       {/* Header with Background for "BIG 5 Personality Test" */}
       
-      <header
-        className="flex justify-center items-center relative text-center py-6 mb-6"
+            <header
+        className="flex justify-center items-center relative text-center py-6 "
         style={{
-          backgroundColor: "#6c858d", // Light gray background
+          backgroundColor: "#3F72AF", // Light gray background
           padding: "24px", // Padding around the text
-          borderRadius: "8px", // Rounded corners
-          boxShadow: "0 6px 10px rgba(0, 0, 0, 0.1)", // Shadow for depth
-          fontFamily: "Lora",
+         // borderRadius: "8px", // Rounded corners
+         // boxShadow: "0 6px 10px rgba(0, 0, 0, 0.1)", // Shadow for depth
+          fontFamily: "Helvetica, Arial, sans-serif", // Set to Helvetica
           position: "relative", // Required for positioning logo
         }}
       >
-
         {/* Logo on the top left */}
         <img
-          src="/logo3.png" // Replace with the actual logo path
+          src="/logo.png" // Replace with the actual logo path
           alt="Logo"
           className="absolute top-1 left-4 w-24 h-24 object-contain" // Adjust size and position
         />
 
-        
         {/* Title in the center */}
-        <h1 className="text-6xl font-medium text-white mx-auto">
+        <h1
+          className="text-6xl font-medium text-white mx-auto"
+          style={{
+            fontWeight: "bold",         // Set font to bold
+            fontVariant: "small-caps",  // Use small caps
+          }}
+        >
           BIG 5 Personality Assessment
         </h1>
       </header>
+      
+  <section
+    className="bg-[#DBE2EF] text-center py-8"
+    style={{
+      backgroundColor: "#DBE2EF", 
+      borderBottomLeftRadius: "20px",
+      borderBottomRightRadius: "20px",
+    }}
+  >
+    <h2 className="text-4xl"
+          style={{
+            fontWeight: "regular",         // Set font to bold
+            fontVariant: "small-caps",
+            color: "#112D4E",  // Use small caps
+          }} >
+
+Instrutions
+</h2>
+    <p className="text-lg text-white mt-4"></p>
+  </section>
+
       
       <Popup
         isOpen={popupUserForm.isOpen}
