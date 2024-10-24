@@ -102,7 +102,7 @@ export default function Home() {
       >
         {/* Logo on the top left */}
         <img
-          src="/logo.png" // Replace with the actual logo path
+          src="/logo_1.png" // Replace with the actual logo path
           alt="Logo"
           className="absolute top-1 left-4 w-24 h-24 object-contain" // Adjust size and position
         />
