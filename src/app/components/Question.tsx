@@ -33,13 +33,13 @@ const Question: React.FC<QuestionProps> = ({
     switch (index) {
       case 0:
       case 4:
-        return "w-20 h-20";
+        return "w-10 h-10 sm:w-20 sm:h-20";
       case 1:
       case 3:
-        return "w-14 h-14";
+        return "w-8 h-8 sm:w-14 sm:h-14";
       case 2:
       default:
-        return "w-12 h-12";
+        return "w-6 h-6 sm:w-12 sm:h-12";
     }
   };
 
@@ -71,55 +71,71 @@ const Question: React.FC<QuestionProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-center relative pb-16">
-      {/* Padding to avoid overlap with the footer */}
-      <p
-        className="text-center text-4xl font-medium text-gray-500 mb-12 mt-12 tracking-wider"
-        style={{ fontFamily: "lora" }}
-      >
-        {question} {/* Question Text  */}
-      </p>
+    <div className=" relative pb-16">
+      <div className="flex flex-col items-center">
+        {/* Padding to avoid overlap with the footer */}
+        <p
+          className="text-center text-xl sm:text-4xl font-medium text-gray-500 mb-12 mt-12 tracking-wider"
+          style={{ fontFamily: "lora" }}
+        >
+          {question} {/* Question Text  */}
+        </p>
 
-      <div className="flex items-center">
-        {/* Disagree Text with Calibri Bold */}
+        <div className="flex items-center">
+          {/* Disagree Text with Calibri Bold */}
+          <h1
+            className="hidden sm:block mr-6 sm:mr-12  text-md sm:text-3xl font-medium tracking-wider"
+            style={{ color: colors.disagree, fontFamily: "lora" }}
+          >
+            Disagree
+          </h1>
+          <div className="flex items-center  space-x-6 sm:space-x-16">
+            {Array.from({ length: 5 }).map((_, index) => {
+              const { backgroundColor, borderColor, color, hover } =
+                getColorStyle(index);
+              return (
+                <button
+                  key={index}
+                  onClick={() => handleButtonClick(index)}
+                  className={`${getSizeClass(
+                    index
+                  )} rounded-full border-4 flex items-center justify-center`}
+                  style={{
+                    backgroundColor,
+                    borderColor,
+                    color,
+                    transition: "background-color 0.3s",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.backgroundColor =
+                      hover;
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.backgroundColor =
+                      selectedIndex === index ? backgroundColor : "transparent";
+                  }}
+                />
+              );
+            })}
+          </div>
+          {/* Agree Text with Calibri Bold */}
+          <h1
+            className="hidden sm:block ml-6 sm:ml-12 text-lg sm:text-3xl font-medium tracking-wider"
+            style={{ color: colors.agree, fontFamily: "lora" }}
+          >
+            Agree
+          </h1>
+        </div>
+      </div>
+      <div className="sm:hidden flex justify-between border-4">
         <h1
-          className="mr-12 text-3xl font-medium tracking-wider"
+          className="text-md sm:text-3xl font-medium tracking-wider"
           style={{ color: colors.disagree, fontFamily: "lora" }}
         >
           Disagree
         </h1>
-        <div className="flex items-center space-x-16">
-          {Array.from({ length: 5 }).map((_, index) => {
-            const { backgroundColor, borderColor, color, hover } =
-              getColorStyle(index);
-            return (
-              <button
-                key={index}
-                onClick={() => handleButtonClick(index)}
-                className={`${getSizeClass(
-                  index
-                )} rounded-full border-4 flex items-center justify-center`}
-                style={{
-                  backgroundColor,
-                  borderColor,
-                  color,
-                  transition: "background-color 0.3s",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.backgroundColor =
-                    hover;
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLElement).style.backgroundColor =
-                    selectedIndex === index ? backgroundColor : "transparent";
-                }}
-              />
-            );
-          })}
-        </div>
-        {/* Agree Text with Calibri Bold */}
         <h1
-          className="ml-12 text-3xl font-medium tracking-wider"
+          className="text-lg sm:text-3xl font-medium tracking-wider"
           style={{ color: colors.agree, fontFamily: "lora" }}
         >
           Agree
