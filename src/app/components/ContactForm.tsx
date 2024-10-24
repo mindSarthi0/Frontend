@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 
 interface Answers {
-  id: string;
+  id: number;
   answer: string;
 }
 
