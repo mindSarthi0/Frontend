@@ -33,13 +33,13 @@ const Question: React.FC<QuestionProps> = ({
     switch (index) {
       case 0:
       case 4:
-        return "w-10 h-10 sm:w-20 sm:h-20";
+        return "w-12 h-12 sm:w-20 sm:h-20";
       case 1:
       case 3:
-        return "w-8 h-8 sm:w-14 sm:h-14";
+        return "w-10 h-10 sm:w-14 sm:h-14";
       case 2:
       default:
-        return "w-6 h-6 sm:w-12 sm:h-12";
+        return "w-8 h-8 sm:w-12 sm:h-12";
     }
   };
 
@@ -84,12 +84,12 @@ const Question: React.FC<QuestionProps> = ({
         <div className="flex items-center">
           {/* Disagree Text with Calibri Bold */}
           <h1
-            className="hidden sm:block mr-6 sm:mr-12  text-md sm:text-3xl font-medium tracking-wider"
+            className="hidden sm:block mr-6 sm:mr-12 text-md sm:text-3xl font-medium tracking-wider"
             style={{ color: colors.disagree, fontFamily: "lora" }}
           >
             Disagree
           </h1>
-          <div className="flex items-center space-x-6 sm:space-x-16">
+          <div className="flex items-center space-x-10 sm:space-x-16">
             {Array.from({ length: 5 }).map((_, index) => {
               const { backgroundColor, borderColor, color, hover } =
                 getColorStyle(index);
