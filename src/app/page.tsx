@@ -8,15 +8,20 @@ import ContactProps from "./components/ContactForm";
 import Question from "./components/Question";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import { Answers } from "./interface";
 
 interface Question {
   id: number;
   question: string;
 }
 
+interface AnswersWithQuestionId {
+  [key: number]: Answers;
+}
+
 export default function Home() {
   const [questions, setQuestions] = useState<Question[]>([]);
-  const [answers, setAnswers] = useState<{ [key: number]: { id: number; answer: string } }>({});
+  const [answers, setAnswers] = useState<AnswersWithQuestionId>({});
   const [popupData, setPopupDate] = useState({
     isOpen: false,
     title: "",
@@ -50,7 +55,10 @@ export default function Home() {
     // Update the answer
     setAnswers((prevState) => ({
       ...prevState,
-      [questionId]: { id: questionId, answer: selectedIndex + 1 + "" },
+      [questionId]: {
+        id: questionId.toString(),
+        answer: selectedIndex + 1 + "",
+      },
     }));
 
     // Move to the next question only if it's not already answered
@@ -75,19 +83,18 @@ export default function Home() {
   // Calculate progress based on the number of answered questions
   const answeredQuestionsCount = Object.keys(answers).length;
   const progress = (answeredQuestionsCount / questions.length) * 100;
-  
+
   return (
-    
     <div className="">
       {/* Header with Background for "BIG 5 Personality Test" */}
-      
-            <header
+
+      <header
         className="flex justify-center items-center relative text-center py-6 "
         style={{
           backgroundColor: "#3F72AF", // Light gray background
           padding: "24px", // Padding around the text
-         // borderRadius: "8px", // Rounded corners
-         // boxShadow: "0 6px 10px rgba(0, 0, 0, 0.1)", // Shadow for depth
+          // borderRadius: "8px", // Rounded corners
+          // boxShadow: "0 6px 10px rgba(0, 0, 0, 0.1)", // Shadow for depth
           fontFamily: "Helvetica, Arial, sans-serif", // Set to Helvetica
           position: "relative", // Required for positioning logo
         }}
@@ -103,35 +110,35 @@ export default function Home() {
         <h1
           className="text-6xl font-medium text-white mx-auto"
           style={{
-            fontWeight: "bold",         // Set font to bold
-            fontVariant: "small-caps",  // Use small caps
+            fontWeight: "bold", // Set font to bold
+            fontVariant: "small-caps", // Use small caps
           }}
         >
           BIG 5 Personality Assessment
         </h1>
       </header>
-      
-  <section
-    className="bg-[#DBE2EF] text-center py-8"
-    style={{
-      backgroundColor: "#DBE2EF", 
-      borderBottomLeftRadius: "20px",
-      borderBottomRightRadius: "20px",
-    }}
-  >
-    <h2 className="text-4xl"
+
+      <section
+        className="bg-[#DBE2EF] text-center py-8"
+        style={{
+          backgroundColor: "#DBE2EF",
+          borderBottomLeftRadius: "20px",
+          borderBottomRightRadius: "20px",
+        }}
+      >
+        <h2
+          className="text-4xl"
           style={{
-            fontWeight: "regular",         // Set font to bold
+            fontWeight: "regular", // Set font to bold
             fontVariant: "small-caps",
-            color: "#112D4E",  // Use small caps
-          }} >
+            color: "#112D4E", // Use small caps
+          }}
+        >
+          Instrutions
+        </h2>
+        <p className="text-lg text-white mt-4"></p>
+      </section>
 
-Instrutions
-</h2>
-    <p className="text-lg text-white mt-4"></p>
-  </section>
-
-      
       <Popup
         isOpen={popupUserForm.isOpen}
         onClose={() => setPopupUserForm({ ...popupUserForm, isOpen: false })}
@@ -163,33 +170,31 @@ Instrutions
       <Header />
       <main className="flex flex-col justify-center">
         <Section withMaxWidth>
-        {
-  questions.map((item: Question, index: number) => (
-    <div
-      key={item.id}
-      ref={(el) => {
-        questionRefs.current[index] = el;
-      }} // Assign ref to each question
-      className={`mb-8 ${
-        index !== currentQuestionIndex ? "blur-sm" : ""
-      }`}
-    >
-      <Question
-        question={item.question}
-        onAnswerSelect={(selectedIndex) =>
-          handleAnswerSelect(selectedIndex, item.id)
-        }
-        totalQuestions={questions.length}
-        currentQuestion={index + 1}
-      />
-      
-      {/* Fine Line to separate questions */}
-      {index !== questions.length - 1 && (
-        <hr className="my-8 border-gray-300" /> // Add this line
-      )}
-    </div>
-  ))
-}
+          {questions.map((item: Question, index: number) => (
+            <div
+              key={item.id}
+              ref={(el) => {
+                questionRefs.current[index] = el;
+              }} // Assign ref to each question
+              className={`mb-8 ${
+                index !== currentQuestionIndex ? "blur-sm" : ""
+              }`}
+            >
+              <Question
+                question={item.question}
+                onAnswerSelect={(selectedIndex) =>
+                  handleAnswerSelect(selectedIndex, item.id)
+                }
+                totalQuestions={questions.length}
+                currentQuestion={index + 1}
+              />
+
+              {/* Fine Line to separate questions */}
+              {index !== questions.length - 1 && (
+                <hr className="my-8 border-gray-300" /> // Add this line
+              )}
+            </div>
+          ))}
           <div className="flex justify-center">
             <button
               className="bg-[#0066FF] text-white px-8 py-4 rounded-lg"
