@@ -89,7 +89,7 @@ const Question: React.FC<QuestionProps> = ({
           >
             Disagree
           </h1>
-          <div className="flex items-center  space-x-6 sm:space-x-16">
+          <div className="flex items-center space-x-6 sm:space-x-16">
             {Array.from({ length: 5 }).map((_, index) => {
               const { backgroundColor, borderColor, color, hover } =
                 getColorStyle(index);
@@ -127,7 +127,7 @@ const Question: React.FC<QuestionProps> = ({
           </h1>
         </div>
       </div>
-      <div className="sm:hidden flex justify-between border-4">
+      <div className="sm:hidden flex justify-between">
         <h1
           className="text-md sm:text-3xl font-medium tracking-wider"
           style={{ color: colors.disagree, fontFamily: "lora" }}
