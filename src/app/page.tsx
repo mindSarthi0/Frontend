@@ -6,7 +6,7 @@ import Section from "./components/Section";
 import { useEffect, useState, useRef } from "react";
 import ContactProps from "./components/ContactForm";
 import Question from "./components/Question";
-import Header from "./components/Header";
+// import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Answers } from "./interface";
 import { BACKEND_API } from "./data";
