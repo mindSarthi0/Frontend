@@ -1,7 +1,7 @@
 "use client"; // This allows client-side code such as useState
 
 // import { useState } from "react";
-// import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
 
 // props: { activeNav?: string }
@@ -17,13 +17,13 @@ export default function Header() {
       <div className="flex justify-between items-center h-[60px] px-4 sm:px-8">
         {/* Logo Section */}
         <Link href="/">
-          {/* <Image
-            src="/global_gcs_logo.png"
-            width={123}
+          <Image
+            src="/logo_1.png"
+            width={40}
             height={42}
             alt="gcs_logo"
             priority
-          /> */}
+          />
         </Link>
 
         {/* Desktop Menu */}

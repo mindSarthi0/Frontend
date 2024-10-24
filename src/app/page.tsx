@@ -104,12 +104,12 @@ export default function Home() {
         <img
           src="/logo_1.png" // Replace with the actual logo path
           alt="Logo"
-          className="absolute top-1 left-4 w-24 h-24 object-contain" // Adjust size and position
+          className="left-4 sm:w-24 sm:h-24 h-[40px] w-[40px] object-contain" // Adjust size and position
         />
 
         {/* Title in the center */}
         <h1
-          className="text-6xl font-medium text-white mx-auto"
+          className="text-xl sm:text-6xl font-medium text-white mx-auto"
           style={{
             fontWeight: "bold", // Set font to bold
             fontVariant: "small-caps", // Use small caps
@@ -119,7 +119,7 @@ export default function Home() {
         </h1>
       </header>
 
-      <section
+      {/* <section
         className="bg-[#DBE2EF] text-center py-8"
         style={{
           backgroundColor: "#DBE2EF",
@@ -128,7 +128,7 @@ export default function Home() {
         }}
       >
         <h2
-          className="text-4xl"
+          className="text-lg sm:text-4xl"
           style={{
             fontWeight: "regular", // Set font to bold
             fontVariant: "small-caps",
@@ -138,7 +138,7 @@ export default function Home() {
           Instrutions
         </h2>
         <p className="text-lg text-white mt-4"></p>
-      </section>
+      </section> */}
 
       <Popup
         isOpen={popupUserForm.isOpen}
@@ -168,7 +168,6 @@ export default function Home() {
         <h1>{popupData.title}</h1>
         <p>{popupData.body}</p>
       </Popup>
-      <Header />
       <main className="flex flex-col justify-center">
         <Section withMaxWidth>
           {questions.map((item: Question, index: number) => (
