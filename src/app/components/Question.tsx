@@ -13,8 +13,8 @@ interface QuestionProps {
 const Question: React.FC<QuestionProps> = ({
   question,
   onAnswerSelect,
-  totalQuestions,
-  currentQuestion,
+  // totalQuestions,
+  // currentQuestion,
 }) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
@@ -46,7 +46,8 @@ const Question: React.FC<QuestionProps> = ({
   const getColorStyle = (index: number) => {
     if (index === 0 || index === 1) {
       return {
-        backgroundColor: selectedIndex === index ? colors.disagree : "transparent",
+        backgroundColor:
+          selectedIndex === index ? colors.disagree : "transparent",
         borderColor: colors.disagree,
         color: selectedIndex === index ? "#FFFFFF" : colors.disagree,
         hover: colors.disagree,
@@ -60,7 +61,8 @@ const Question: React.FC<QuestionProps> = ({
       };
     } else {
       return {
-        backgroundColor: selectedIndex === index ? colors.neutral : "transparent",
+        backgroundColor:
+          selectedIndex === index ? colors.neutral : "transparent",
         borderColor: colors.neutral,
         color: selectedIndex === index ? "#FFFFFF" : colors.neutral,
         hover: colors.neutral,
@@ -71,13 +73,11 @@ const Question: React.FC<QuestionProps> = ({
   return (
     <div className="flex flex-col items-center relative pb-16">
       {/* Padding to avoid overlap with the footer */}
-      <p className="text-center text-4xl font-medium text-gray-500 mb-12 mt-12 tracking-wider"
-      style={{fontFamily: "lora" }}>
-
-
+      <p
+        className="text-center text-4xl font-medium text-gray-500 mb-12 mt-12 tracking-wider"
+        style={{ fontFamily: "lora" }}
+      >
         {question} {/* Question Text  */}
-
-
       </p>
 
       <div className="flex items-center">
@@ -90,12 +90,15 @@ const Question: React.FC<QuestionProps> = ({
         </h1>
         <div className="flex items-center space-x-16">
           {Array.from({ length: 5 }).map((_, index) => {
-            const { backgroundColor, borderColor, color, hover } = getColorStyle(index);
+            const { backgroundColor, borderColor, color, hover } =
+              getColorStyle(index);
             return (
               <button
                 key={index}
                 onClick={() => handleButtonClick(index)}
-                className={`${getSizeClass(index)} rounded-full border-4 flex items-center justify-center`}
+                className={`${getSizeClass(
+                  index
+                )} rounded-full border-4 flex items-center justify-center`}
                 style={{
                   backgroundColor,
                   borderColor,
@@ -103,7 +106,8 @@ const Question: React.FC<QuestionProps> = ({
                   transition: "background-color 0.3s",
                 }}
                 onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLElement).style.backgroundColor = hover;
+                  (e.currentTarget as HTMLElement).style.backgroundColor =
+                    hover;
                 }}
                 onMouseLeave={(e) => {
                   (e.currentTarget as HTMLElement).style.backgroundColor =
@@ -116,7 +120,7 @@ const Question: React.FC<QuestionProps> = ({
         {/* Agree Text with Calibri Bold */}
         <h1
           className="ml-12 text-3xl font-medium tracking-wider"
-          style={{ color: colors.agree, fontFamily:"lora" }}
+          style={{ color: colors.agree, fontFamily: "lora" }}
         >
           Agree
         </h1>

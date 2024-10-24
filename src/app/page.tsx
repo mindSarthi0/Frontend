@@ -9,6 +9,7 @@ import Question from "./components/Question";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Answers } from "./interface";
+import { BACKEND_API } from "./data";
 
 interface Question {
   id: number;
@@ -40,7 +41,7 @@ export default function Home() {
 
   useEffect(() => {
     const getQuestions = async () => {
-      const response = await fetch("http://localhost:8080/questions");
+      const response = await fetch(BACKEND_API + "/questions");
       const data = await response.json();
       setQuestions(data);
     };
@@ -156,7 +157,7 @@ export default function Home() {
             });
           }}
           onFailed={() => alert("Failed to submit: Check logs")}
-          backendApi={"http://localhost:8080"}
+          backendApi={BACKEND_API}
         />
       </Popup>
       <Popup
