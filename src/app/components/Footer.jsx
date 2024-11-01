@@ -51,7 +51,7 @@ const Footer = () => {
           </div>
 
           {/* Legal Section */}
-          {/* <div>
+          <div>
             <h3 className="text-white font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
               <li>Privacy Policy</li>
@@ -59,7 +59,7 @@ const Footer = () => {
               <li>Terms of Use</li>
               <li>Refund Policy</li>
             </ul>
-          </div> */}
+          </div>
 
           {/* Quick Links Section */}
           {/* <div>
