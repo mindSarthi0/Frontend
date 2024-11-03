@@ -70,11 +70,11 @@ export default function LegalPage() {
         <div ref={refundRef} id="refund" className="mb-12 bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4 text-[#112D4E]">Refund and Cancellation Policy</h2>
           <ul className="list-disc pl-5 mb-4 text-[#112D4E]">
-            <li><strong>Eligibility for Refunds:</strong> Given the digital nature of our services, refunds are generally not available after the report has been delivered.</li>
+            <li><strong>Eligibility for Refunds:</strong>  Our digital psychological assessment reports are crafted with care and personalization. However, if you are not satisfied with your report, you may request a refund within 3 days of delivery by contacting us at care@duinvites.com.</li>
             <li><strong>Cancellation Policy:</strong> You may cancel an order before the payment is processed. Once paid, cancellations are no longer possible.</li>
-            <li><strong>Refund Processing:</strong> If an exception is granted, refunds will be processed within 5-7 working days. The credited amount will be returned to your original payment method.</li>
+            <li><strong>Refund Processing:</strong> Approved refunds will be processed within 5-7 working days. The credited amount will be returned to your original payment method.</li>
           </ul>
-          <p className="text-[#112D4E]">For assistance with refunds, please contact us at support@cognify.com.</p>
+          <p className="text-[#112D4E]">For any questions or assistance, please reach out to us at care@duinvites.com.</p>
         </div>
 
         <div ref={pricingRef} id="pricing" className="mb-12 bg-white p-6 rounded-lg shadow-md">
@@ -89,9 +89,9 @@ export default function LegalPage() {
 
         <div ref={contactRef} id="contact" className="mb-12 bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4 text-[#112D4E]">Contact Us</h2>
-          <p className="text-[#112D4E]"><strong>Email:</strong> support@cognify.com</p>
-          <p className="text-[#112D4E]"><strong>Phone:</strong> +91 1234567890</p>
-          <p className="text-[#112D4E]"><strong>Address:</strong> 123 Tech Park, Bangalore, Karnataka, India - 560001</p>
+          <p className="text-[#112D4E]"><strong>Email:</strong> care@duinvites.com</p>
+          <p className="text-[#112D4E]"><strong>Phone:</strong> +91 7004585502</p>
+          <p className="text-[#112D4E]"><strong>Address:</strong>South Campus, University of Delhi</p>
         </div>
 
         <div ref={servicesRef} id="services" className="mb-12 bg-white p-6 rounded-lg shadow-md">
