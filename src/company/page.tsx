@@ -40,7 +40,7 @@ export default function CompanyPage() {
           <h2 className="text-2xl font-semibold mb-4 text-[#112D4E]">Contact</h2>
           <h3 className="text-xl font-medium mb-2 text-[#112D4E]">Get in Touch with Us</h3>
           <p className="mb-4 text-[#112D4E]">
-            Have questions or need support? We're here to help!
+            Have questions or need support? We are here to help!
           </p>
           <ul className="mb-4 text-[#112D4E]">
             <li><strong>Email:</strong> support@cognify.com</li>
