@@ -18,24 +18,24 @@ const Footer = () => {
               <li className="flex items-center">
                 <Link href={"tel:" + contactNumber} className="flex">
                   <FaPhone className="mr-2" />
-                  {contactNumber}
+                  {contactNumber}7004585502
                 </Link>
               </li>
               <li className="flex items-center">
                 <Link href={"mailto:" + email} className="flex">
                   <FaEnvelope className="mr-2" />
-                  {email}
+                  {email}care@duinvites.com
                 </Link>
               </li>
               <li className="flex items-center">
                 <FaMapMarkerAlt className="mr-2" />
-                {address}
+                {address}South Campus, University of Delhi
               </li>
             </ul>
           </div>
 
           {/* Company Section */}
-          <div>
+         {/*} <div>
             <h3 className="text-white font-semibold mb-4">Company</h3>
             <ul className="space-y-2">
               <li>
@@ -51,15 +51,20 @@ const Footer = () => {
           </div>
 
           {/* Legal Section */}
-          {/* <div>
+          
+          <div>
             <h3 className="text-white font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
-              <li>Privacy Policy</li>
-              <li>Terms & Services</li>
-              <li>Terms of Use</li>
-              <li>Refund Policy</li>
+              <li><Link href="/legal?section=terms" className="hover:underline">Terms and Conditions</Link></li>
+              <li><Link href="/legal?section=privacy" className="hover:underline">Privacy Policy</Link></li>
+              <li><Link href="/legal?section=refund" className="hover:underline">Refund and Cancellation</Link></li>
+              <li><Link href="/legal?section=pricing" className="hover:underline">Pricing</Link></li>
+              <li><Link href="/legal?section=shipping" className="hover:underline">Delivery Policy</Link></li>
+              <li><Link href="/legal?section=contact" className="hover:underline">Contact Us</Link></li>
+              <li><Link href="/legal?section=services" className="hover:underline">Our Services</Link></li>
             </ul>
-          </div> */}
+          </div>
+          
 
           {/* Quick Links Section */}
           {/* <div>
