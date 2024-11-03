@@ -48,7 +48,7 @@ export default function CompanyPage() {
             <li><strong>Operating Address:</strong> 123 Tech Park, Bangalore, Karnataka, India - 560001</li>
           </ul>
           <p className="mb-4 text-[#112D4E]">
-            For inquiries about our assessments, partnership opportunities, or general questions, please reach out to us via the contact methods above. We're excited to assist you on your journey to self-discovery.
+            For inquiries about our assessments, partnership opportunities, or general questions, please reach out to us via the contact methods above. We are excited to assist you on your journey to self-discovery.
           </p>
         </section>
 
