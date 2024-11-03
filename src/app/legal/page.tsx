@@ -13,7 +13,7 @@ export default function LegalPage() {
   const servicesRef = useRef<HTMLDivElement>(null)
 
   const searchParams = useSearchParams()
-
+  
   useEffect(() => {
     const section = searchParams.get('section')
     if (section) {
