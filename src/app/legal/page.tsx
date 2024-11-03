@@ -58,7 +58,7 @@ export default function LegalPage() {
 
         <div ref={privacyRef} id="privacy" className="mb-12 bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-semibold mb-4 text-[#112D4E]">Privacy Policy</h2>
-          <p className="mb-4 text-[#112D4E]">At COGNIFY, we value your privacy. Here's how we handle your data:</p>
+          <p className="mb-4 text-[#112D4E]">At COGNIFY, we value your privacy. Here is how we handle your data:</p>
           <ul className="list-disc pl-5 mb-4 text-[#112D4E]">
             <li><strong>Data Collection:</strong> We collect personal data such as your name, email address, and assessment responses. This information helps us generate personalized reports.</li>
             <li><strong>Data Usage:</strong> Your data is used solely to provide and improve our psychological assessment services. We do not share your information with third parties.</li>
