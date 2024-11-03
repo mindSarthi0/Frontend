@@ -51,7 +51,6 @@ const Footer = () => {
           </div>
 
           {/* Legal Section */}
-          
           <div>
             <h3 className="text-white font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
@@ -64,7 +63,6 @@ const Footer = () => {
               <li><Link href="/legal?section=services" className="hover:underline">Our Services</Link></li>
             </ul>
           </div>
-          
 
           {/* Quick Links Section */}
           {/* <div>
