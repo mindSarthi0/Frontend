@@ -24,7 +24,7 @@ const Footer = () => {
               <li className="flex items-center">
                 <Link href={"mailto:" + email} className="flex">
                   <FaEnvelope className="mr-2" />
-                  {email}care@duinvites.com
+                  {email}support@mindsarthi.com
                 </Link>
               </li>
               <li className="flex items-center">
