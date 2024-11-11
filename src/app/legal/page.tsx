@@ -108,6 +108,7 @@ const LegalPage = dynamic(() => Promise.resolve(() => {
           </p>
           <ul className="list-disc pl-5 mb-4 text-[#112D4E]">
             <li>Email: <a href="mailto:support@mindsarthi.com" className="text-blue-600">support@mindsarthi.com</a></li>
+            <li>Office Address: 4th floor, 17, Satya Niketan, 110021, Delhi </li>
             <li>Office Hours: Monday to Friday, 9:00 AM – 6:00 PM IST</li>
           </ul>
         </div>
