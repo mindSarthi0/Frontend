@@ -147,7 +147,7 @@ export default function Home() {
       >
         <ContactProps
           answers={Object.values(answers)}
-          onSuccess={() => {
+          onSuccess={(paymentLink) => {
             setPopupUserForm({ isOpen: false });
             setPopupDate({
               isOpen: true,
@@ -155,6 +155,8 @@ export default function Home() {
               titleClassName: "text-3xl",
               body: "Your report is sent for analysis and soon be delivered to your email.",
             });
+
+            window.open(paymentLink, "_blank");
           }}
           onFailed={() => alert("Failed to submit: Check logs")}
           backendApi={BACKEND_API}

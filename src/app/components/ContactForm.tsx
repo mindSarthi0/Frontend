@@ -7,7 +7,7 @@ interface Answers {
 
 interface ContactProps {
   backendApi: string;
-  onSuccess: () => void;
+  onSuccess: (paymentLink: string) => void;
   onFailed: () => void;
   answers: Answers[];
 }
@@ -114,7 +114,8 @@ const ContactForm: React.FC<ContactProps> = ({
       })
       .then((result) => {
         console.log("Success:", result);
-        onSuccess();
+        const paymentLink = result.paymentLink;
+        onSuccess(paymentLink);
       })
       .catch(() => {
         onFailed();
