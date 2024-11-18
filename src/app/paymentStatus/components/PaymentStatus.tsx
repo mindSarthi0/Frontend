@@ -1,16 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import PaymentStatus from "./components/PaymentStatus";
-import React, { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
-export default function PaymentStatusPage() {
+export default function PaymentStatus() {
+  const searchParams = useSearchParams();
+
+  const status = searchParams.get("status") || "pending";
+
+  const message = searchParams.get("message") || "Payment is still processing";
+
   return (
     <div className="min-h-screen bg-[#F9F7F7] flex flex-col justify-between">
       <main className="container mx-auto px-4 py-8 text-center">
-        <Suspense fallback={<div>Loading...</div>}>
-          <PaymentStatus />
-        </Suspense>
+        <h5 className="text-2xl font-semibold mb-4">
+          Payment Status: {status}
+        </h5>
+        <p className="text-lg mb-6">{message}</p>
       </main>
 
       <footer className="bg-[#3F72AF] text-white py-6">
