@@ -6,7 +6,6 @@ import Section from "./components/Section";
 import { useEffect, useState, useRef } from "react";
 import ContactProps from "./components/ContactForm";
 import Question from "./components/Question";
-// import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Answers } from "./interface";
 import { BACKEND_API } from "./data";
@@ -30,14 +29,15 @@ export default function Home() {
     body: "",
   });
 
-  const [paymentPopup, setPaymentPopup] = useState({
-    isOpen: false,
-    initialPaymentLink: "",
-  });
+  // const [paymentPopup, setPaymentPopup] = useState({
+  //   isOpen: false,
+  //   initialPaymentLink: "",
+  // });
 
-  const [contactForm, setContactForm] = useState<ContactProps>({
-    isOpen: false,
-  });
+  // const [contactForm, setContactForm] = useState({
+  //   isOpen: false,
+  // });
+
   const [popupUserForm, setPopupUserForm] = useState({
     isOpen: false,
   });
