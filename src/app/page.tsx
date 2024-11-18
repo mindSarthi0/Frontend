@@ -30,6 +30,14 @@ export default function Home() {
     body: "",
   });
 
+  const [paymentPopup, setPaymentPopup] = useState({
+    isOpen: false,
+    initialPaymentLink: "",
+  });
+
+  const [contactForm, setContactForm] = useState<ContactProps>({
+    isOpen: false,
+  });
   const [popupUserForm, setPopupUserForm] = useState({
     isOpen: false,
   });
@@ -143,7 +151,7 @@ export default function Home() {
       <Popup
         isOpen={popupUserForm.isOpen}
         onClose={() => setPopupUserForm({ ...popupUserForm, isOpen: false })}
-        wrapperClass="p-[16px]"
+        popupContainerClass="p-[16px] sm:max-w-[600px] max-w-[480px]"
       >
         <ContactProps
           answers={Object.values(answers)}
@@ -156,7 +164,9 @@ export default function Home() {
               body: "Your report is sent for analysis and soon be delivered to your email.",
             });
 
+            // Open this of Iframe
             window.open(paymentLink, "_blank");
+            // setPaymentPopup({ isOpen: true, initialPaymentLink: paymentLink });
           }}
           onFailed={() => alert("Failed to submit: Check logs")}
           backendApi={BACKEND_API}
@@ -165,11 +175,33 @@ export default function Home() {
       <Popup
         isOpen={popupData.isOpen}
         onClose={() => setPopupDate({ ...popupData, isOpen: false })}
-        wrapperClass="p-[16px]"
+        popupContainerClass="p-[16px] sm:max-w-[600px] max-w-[480px]"
       >
         <h1>{popupData.title}</h1>
         <p>{popupData.body}</p>
       </Popup>
+
+      {/* <Popup
+        isOpen={paymentPopup.isOpen}
+        onClose={() => setPaymentPopup({ ...paymentPopup, isOpen: false })}
+        popupContainerClass="p-[0px] max-w-[100vw] h-[100vh]"
+      >
+        <iframe
+          src={paymentPopup.initialPaymentLink}
+          width="100%"
+          height="100%"
+          style={{
+            height: "100vh",
+            width: "100vw",
+          }}
+        />
+        <Web
+          url={paymentPopup.initialPaymentLink}
+          onChangeUrl={(changeUrl) => {
+            console.log(" URL change:", changeUrl);
+          }}
+        />
+      </Popup> */}
       <main className="flex flex-col justify-center">
         <Section withMaxWidth>
           {questions.map((item: Question, index: number) => (

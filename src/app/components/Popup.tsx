@@ -4,7 +4,8 @@ interface PopupProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
-  wrapperClass?: string;
+  popupContainerClass?: string;
+  wrapperContainerClass?: string;
   ctaName?: string;
 }
 
@@ -12,13 +13,16 @@ const Popup: React.FC<PopupProps> = ({
   isOpen,
   onClose,
   children,
-  wrapperClass = "",
+  popupContainerClass = "",
+  wrapperContainerClass = "",
   ctaName,
 }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div
+      className={`fixed inset-0 z-50 flex items-center justify-center ${wrapperContainerClass}`}
+    >
       {/* Background overlay */}
       <div
         className="absolute inset-0 bg-black bg-opacity-50"
@@ -27,8 +31,7 @@ const Popup: React.FC<PopupProps> = ({
 
       {/* Popup container */}
       <div
-        className={`relative bg-white p-6 rounded-lg shadow-lg max-w-lg w-full mx-6 ${wrapperClass}`}
-        style={{ maxWidth: "600px" }}
+        className={`relative bg-white p-6 rounded-lg shadow-lg max-w-lg w-full mx-6 ${popupContainerClass}`}
       >
         {/* Content */}
         <div className="popup-content">{children}</div>
