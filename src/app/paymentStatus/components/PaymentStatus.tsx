@@ -18,31 +18,6 @@ export default function PaymentStatus() {
         </h5>
         <p className="text-lg mb-6">{message}</p>
       </main>
-
-      <footer className="bg-[#3F72AF] text-white py-6">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p>&copy; 2023 COGNIFY. All rights reserved.</p>
-            <nav className="mt-4 md:mt-0">
-              <ul className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4">
-                <li>
-                  <Link
-                    href="/legal?section=privacy"
-                    className="hover:underline"
-                  >
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/legal?section=terms" className="hover:underline">
-                    Terms of Service
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
