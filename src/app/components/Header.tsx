@@ -14,10 +14,8 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({
   showDropShadow = false,
-  onBackClick,
   title,
   onTitleClick,
-  rightMenu,
 }) => {
   return (
     <header
