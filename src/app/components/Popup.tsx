@@ -31,7 +31,7 @@ const Popup: React.FC<PopupProps> = ({
 
       {/* Popup container */}
       <div
-        className={`relative bg-white p-6 rounded-lg shadow-lg max-w-lg w-full mx-6 ${popupContainerClass}`}
+        className={`relative bg-white p-6 rounded-xl shadow-2xl max-w-lg w-full mx-6 ${popupContainerClass}`}
       >
         {/* Content */}
         <div className="popup-content">{children}</div>

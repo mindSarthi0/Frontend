@@ -13,7 +13,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({
-  showDropShadow = false,
+  showDropShadow = true,
   title,
   onTitleClick,
 }) => {

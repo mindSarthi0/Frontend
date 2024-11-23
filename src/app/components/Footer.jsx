@@ -9,7 +9,7 @@ const Footer = () => {
 
   return (
     <footer className=" text-gray-400 py-10 flex flex-col bg-slate-800">
-      <div className="text-gray-400 flex sm:flex-row flex-col ">
+      <div className="text-gray-400 flex sm:flex-row flex-col pb-4">
         <div className="flex-3 max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:order-1 order-2">
           {/* Reach Us Section */}
           <div>
@@ -115,6 +115,13 @@ const Footer = () => {
         {/* <div className="flex-2 sm:order-2 order-1 mb-[48px]">
           <NewsletterSignup />
         </div> */}
+      </div>
+      <div className="flex items-center border-t border-gray-700 py-4 justify-center">
+        <div className="flex justify-center items-center">
+          <p className="text-gray-400 text-center">
+            <strong>MindSarthi</strong> Copyright © {new Date().getFullYear()}
+          </p>
+        </div>
       </div>
     </footer>
   );

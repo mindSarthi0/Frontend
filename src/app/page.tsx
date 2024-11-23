@@ -13,6 +13,7 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import ComponentLoader from "./components/ComponentLoader";
 import Loader from "./components/Loader";
+import PillButton from "./components/PillButton";
 
 interface Question {
   id: number;
@@ -45,10 +46,14 @@ export default function Home() {
 
   useEffect(() => {
     const getQuestions = async () => {
-      const response = await fetch(BACKEND_API + "/questions");
-      const data = await response.json();
-      setQuestions(data);
-      setQuestionsLoading(false);
+      try {
+        const response = await fetch(BACKEND_API + "/questions");
+        const data = await response.json();
+        setQuestions(data);
+        setQuestionsLoading(false);
+      } catch (error) {
+        console.error("Error fetching questions:", error);
+      }
     };
 
     getQuestions();
@@ -107,9 +112,9 @@ export default function Home() {
             setPopupUserForm({ isOpen: false });
             setPopupDate({
               isOpen: true,
-              title: "Congratulations!",
+              title: "Please wait!",
               titleClassName: "text-3xl",
-              body: "Your report is sent for analysis and soon be delivered to your email.",
+              body: "Please do not refresh this window. Your payment is being processed.",
             });
 
             // Open this of Iframe
@@ -125,10 +130,17 @@ export default function Home() {
         onClose={() => setPopupDate({ ...popupData, isOpen: false })}
         popupContainerClass="p-[16px] sm:max-w-[600px] max-w-[480px]"
       >
-        <h1>{popupData.title}</h1>
+        <h1 className={popupData.titleClassName}>{popupData.title}</h1>
         <p>{popupData.body}</p>
       </Popup>
       <Main>
+        {/* Progress Bar at the bottom of the screen */}
+        <div className="w-full fixed top-[64px] left-0 bg-gray-200">
+          <div
+            className="h-2 bg-green-500 transition-all duration-300"
+            style={{ width: `${progress}%` }} // Set width based on progress
+          ></div>
+        </div>
         <ComponentLoader
           isLoading={isLoading}
           LoaderComponent={
@@ -164,22 +176,18 @@ export default function Home() {
               </div>
             ))}
             <div className="flex justify-center">
-              <button
+              {/* <button
                 className="bg-[#0066FF] text-white px-8 py-4 rounded-lg"
                 onClick={onClickHandler}
               >
                 Submit
-              </button>
+              </button> */}
+              <PillButton onClick={onClickHandler} className="px-8 py-4">
+                <h1 className=" text-2xl">Next</h1>
+              </PillButton>
             </div>
           </Section>
           <section className="mb-8"></section>
-          {/* Progress Bar at the bottom of the screen */}
-          <div className="w-full fixed top-[64px] left-0 bg-gray-200">
-            <div
-              className="h-2 bg-green-500 transition-all duration-300"
-              style={{ width: `${progress}%` }} // Set width based on progress
-            ></div>
-          </div>
         </ComponentLoader>
       </Main>
 

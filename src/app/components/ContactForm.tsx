@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+import PillButton from "./PillButton";
 
 interface Answers {
   id: number;
@@ -34,7 +35,9 @@ const ContactForm: React.FC<ContactProps> = ({
   });
 
   const handleChangeInput = (
-    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+    event: ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
     key: string,
     parser?: (val: string | number) => string | number
   ) => {
@@ -59,12 +62,17 @@ const ContactForm: React.FC<ContactProps> = ({
   const validate = () => {
     let noError = true;
     if (inputData.name === "") {
-      handleChangeError("firstName", "Firstname cannot be empty");
+      handleChangeError("name", "Name cannot be empty");
       noError = false;
     }
 
     if (inputData.email === "") {
-      handleChangeError("phone", "phone cannot be empty");
+      handleChangeError("age", "Age cannot be empty");
+      noError = false;
+    }
+
+    if (inputData.gender === "") {
+      handleChangeError("gender", "Please select your gender");
       noError = false;
     }
 
@@ -127,7 +135,7 @@ const ContactForm: React.FC<ContactProps> = ({
     <div>
       <div>
         <div className="flex space-x-[0px] sm:space-y-4 mb-[32px] flex-col">
-          <div className="w-[100%]">
+          <div className="w-[100%] ">
             <label className="block text-gray-700 font-semibold">Name</label>
             <input
               type="text"
@@ -140,13 +148,13 @@ const ContactForm: React.FC<ContactProps> = ({
             />
             <p className="text-[red]">{error.name}</p>
           </div>
-          <div className="w-[100%]">
+          <div className="w-[100%] pt-6">
             <label className="block text-gray-700 font-semibold">Age</label>
             <input
-              type="number"
+              type="tel"
               className="w-full p-2 mt-1 appearance-none bg-transparent focus:outline-none border-b border-[#8D8D8D] focus:border-[black] text-black"
               value={inputData.age}
-              placeholder="eg. Rahul"
+              placeholder="eg. 24"
               onChange={(event) => {
                 handleChangeInput(event, "age", (val) => {
                   if (val === "") return "";
@@ -156,20 +164,23 @@ const ContactForm: React.FC<ContactProps> = ({
             />
             <p className="text-[red]">{error.age}</p>
           </div>
-          <div className="w-[100%]">
+          <div className="w-[100%] pt-6">
             <label className="block text-gray-700 font-semibold">Gender</label>
-            <input
-              type="text"
+            <select
               className="w-full p-2 mt-1 appearance-none bg-transparent focus:outline-none border-b border-[#8D8D8D] focus:border-[black] text-black"
               value={inputData.gender}
-              placeholder="eg. male/female/noidea"
               onChange={(event) => {
                 handleChangeInput(event, "gender");
               }}
-            />
+            >
+              <option value="">Select gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
             <p className="text-[red]">{error.gender}</p>
           </div>
-          <div className="w-[100%]">
+          <div className="w-[100%] pt-6">
             <label className="block text-gray-700 font-semibold">Email</label>
             <input
               type="email"
@@ -184,12 +195,7 @@ const ContactForm: React.FC<ContactProps> = ({
           </div>
         </div>
       </div>
-      <button
-        onClick={handleClick}
-        className="bg-blue-700 text-white p-2 rounded-[4px]"
-      >
-        Sumit
-      </button>
+      <PillButton onClick={handleClick}>Submit</PillButton>
     </div>
   );
 };
