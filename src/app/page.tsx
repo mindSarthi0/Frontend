@@ -122,7 +122,6 @@ export default function Home() {
             // setPaymentPopup({ isOpen: true, initialPaymentLink: paymentLink });
           }}
           onFailed={() => alert("Failed to submit: Check logs")}
-          backendApi={BACKEND_API}
         />
       </Popup>
       <Popup

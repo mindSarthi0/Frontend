@@ -3,6 +3,7 @@
 import React from "react";
 // import Header from "./components/Header";
 import Footer from "../components/Footer";
+import Image from "next/image";
 
 const TermsAndConditions = () => {
   return (
@@ -82,7 +83,7 @@ export default function Home() {
         }}
       >
         {/* Logo on the top left */}
-        <img
+        <Image
           src="/logo_1.png" // Replace with the actual logo path
           alt="Logo"
           className="left-4 sm:w-24 sm:h-24 h-[40px] w-[40px] object-contain" // Adjust size and position

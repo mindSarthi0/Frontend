@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import PillButton from "./PillButton";
+import { BACKEND_API } from "../data";
 
 interface Answers {
   id: number;
@@ -7,14 +8,12 @@ interface Answers {
 }
 
 interface ContactProps {
-  backendApi: string;
   onSuccess: (paymentLink: string) => void;
   onFailed: () => void;
   answers: Answers[];
 }
 
 const ContactForm: React.FC<ContactProps> = ({
-  backendApi,
   answers,
   onSuccess,
   onFailed,
@@ -113,7 +112,7 @@ const ContactForm: React.FC<ContactProps> = ({
       body: raw,
     };
 
-    fetch(`${backendApi}/submit`, requestOptions)
+    fetch(`${BACKEND_API as string}/submit`, requestOptions)
       .then(async (response) => {
         if (response.ok) {
           return response.json();
