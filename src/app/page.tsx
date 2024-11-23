@@ -9,6 +9,10 @@ import Question from "./components/Question";
 import Footer from "./components/Footer";
 import { Answers } from "./interface";
 import { BACKEND_API } from "./data";
+import Header from "./components/Header";
+import Main from "./components/Main";
+import ComponentLoader from "./components/ComponentLoader";
+import Loader from "./components/Loader";
 
 interface Question {
   id: number;
@@ -21,6 +25,7 @@ interface AnswersWithQuestionId {
 
 export default function Home() {
   const [questions, setQuestions] = useState<Question[]>([]);
+  const [questionsLoading, setQuestionsLoading] = useState<boolean>(true);
   const [answers, setAnswers] = useState<AnswersWithQuestionId>({});
   const [popupData, setPopupDate] = useState({
     isOpen: false,
@@ -28,15 +33,6 @@ export default function Home() {
     titleClassName: "",
     body: "",
   });
-
-  // const [paymentPopup, setPaymentPopup] = useState({
-  //   isOpen: false,
-  //   initialPaymentLink: "",
-  // });
-
-  // const [contactForm, setContactForm] = useState({
-  //   isOpen: false,
-  // });
 
   const [popupUserForm, setPopupUserForm] = useState({
     isOpen: false,
@@ -52,6 +48,7 @@ export default function Home() {
       const response = await fetch(BACKEND_API + "/questions");
       const data = await response.json();
       setQuestions(data);
+      setQuestionsLoading(false);
     };
 
     getQuestions();
@@ -93,60 +90,11 @@ export default function Home() {
   const answeredQuestionsCount = Object.keys(answers).length;
   const progress = (answeredQuestionsCount / questions.length) * 100;
 
+  const isLoading = questionsLoading;
+
   return (
     <div className="">
-      {/* Header with Background for "BIG 5 Personality Test" */}
-
-      <header
-        className="flex justify-center items-center relative text-center py-6 "
-        style={{
-          backgroundColor: "#3F72AF", // Light gray background
-          padding: "24px", // Padding around the text
-          // borderRadius: "8px", // Rounded corners
-          // boxShadow: "0 6px 10px rgba(0, 0, 0, 0.1)", // Shadow for depth
-          fontFamily: "Helvetica, Arial, sans-serif", // Set to Helvetica
-          position: "relative", // Required for positioning logo
-        }}
-      >
-        {/* Logo on the top left */}
-        <img
-          src="/logo_1.png" // Replace with the actual logo path
-          alt="Logo"
-          className="left-4 sm:w-24 sm:h-24 h-[40px] w-[40px] object-contain" // Adjust size and position
-        />
-
-        {/* Title in the center */}
-        <h1
-          className="text-xl sm:text-6xl font-medium text-white mx-auto"
-          style={{
-            fontWeight: "bold", // Set font to bold
-            fontVariant: "small-caps", // Use small caps
-          }}
-        >
-          BIG 5 Personality Assessment
-        </h1>
-      </header>
-
-      {/* <section
-        className="bg-[#DBE2EF] text-center py-8"
-        style={{
-          backgroundColor: "#DBE2EF",
-          borderBottomLeftRadius: "20px",
-          borderBottomRightRadius: "20px",
-        }}
-      >
-        <h2
-          className="text-lg sm:text-4xl"
-          style={{
-            fontWeight: "regular", // Set font to bold
-            fontVariant: "small-caps",
-            color: "#112D4E", // Use small caps
-          }}
-        >
-          Instrutions
-        </h2>
-        <p className="text-lg text-white mt-4"></p>
-      </section> */}
+      <Header title="BIG 5 Personality Assessment" />
 
       <Popup
         isOpen={popupUserForm.isOpen}
@@ -180,74 +128,60 @@ export default function Home() {
         <h1>{popupData.title}</h1>
         <p>{popupData.body}</p>
       </Popup>
-
-      {/* <Popup
-        isOpen={paymentPopup.isOpen}
-        onClose={() => setPaymentPopup({ ...paymentPopup, isOpen: false })}
-        popupContainerClass="p-[0px] max-w-[100vw] h-[100vh]"
-      >
-        <iframe
-          src={paymentPopup.initialPaymentLink}
-          width="100%"
-          height="100%"
-          style={{
-            height: "100vh",
-            width: "100vw",
-          }}
-        />
-        <Web
-          url={paymentPopup.initialPaymentLink}
-          onChangeUrl={(changeUrl) => {
-            console.log(" URL change:", changeUrl);
-          }}
-        />
-      </Popup> */}
-      <main className="flex flex-col justify-center">
-        <Section withMaxWidth>
-          {questions.map((item: Question, index: number) => (
-            <div
-              key={item.id}
-              ref={(el) => {
-                questionRefs.current[index] = el;
-              }} // Assign ref to each question
-              className={`mb-8 ${
-                index !== currentQuestionIndex ? "blur-sm" : ""
-              }`}
-            >
-              <Question
-                question={item.question}
-                onAnswerSelect={(selectedIndex) =>
-                  handleAnswerSelect(selectedIndex, item.id)
-                }
-                totalQuestions={questions.length}
-                currentQuestion={index + 1}
-              />
-
-              {/* Fine Line to separate questions */}
-              {index !== questions.length - 1 && (
-                <hr className="my-8 border-gray-300" /> // Add this line
-              )}
+      <Main>
+        <ComponentLoader
+          isLoading={isLoading}
+          LoaderComponent={
+            <div className=" h-screen flex justify-center items-center">
+              <Loader text="Loading Questions..." />
             </div>
-          ))}
-          <div className="flex justify-center">
-            <button
-              className="bg-[#0066FF] text-white px-8 py-4 rounded-lg"
-              onClick={onClickHandler}
-            >
-              Submit
-            </button>
-          </div>
-        </Section>
-        <section className="mb-8"></section>
-      </main>
+          }
+        >
+          <Section withMaxWidth>
+            {questions.map((item: Question, index: number) => (
+              <div
+                key={item.id}
+                ref={(el) => {
+                  questionRefs.current[index] = el;
+                }} // Assign ref to each question
+                className={`mb-8 ${
+                  index !== currentQuestionIndex ? "blur-sm" : ""
+                }`}
+              >
+                <Question
+                  question={item.question}
+                  onAnswerSelect={(selectedIndex) =>
+                    handleAnswerSelect(selectedIndex, item.id)
+                  }
+                  totalQuestions={questions.length}
+                  currentQuestion={index + 1}
+                />
 
-      {/* Progress Bar at the bottom of the screen */}
-      <div className="w-full fixed bottom-0 left-0 bg-gray-200">
-        <div
-          className="h-2 bg-green-500 transition-all duration-300"
-          style={{ width: `${progress}%` }} // Set width based on progress
-        ></div>
-      </div>
+                {/* Fine Line to separate questions */}
+                {index !== questions.length - 1 && (
+                  <hr className="my-8 border-gray-300" /> // Add this line
+                )}
+              </div>
+            ))}
+            <div className="flex justify-center">
+              <button
+                className="bg-[#0066FF] text-white px-8 py-4 rounded-lg"
+                onClick={onClickHandler}
+              >
+                Submit
+              </button>
+            </div>
+          </Section>
+          <section className="mb-8"></section>
+          {/* Progress Bar at the bottom of the screen */}
+          <div className="w-full fixed top-[64px] left-0 bg-gray-200">
+            <div
+              className="h-2 bg-green-500 transition-all duration-300"
+              style={{ width: `${progress}%` }} // Set width based on progress
+            ></div>
+          </div>
+        </ComponentLoader>
+      </Main>
 
       <Footer />
     </div>

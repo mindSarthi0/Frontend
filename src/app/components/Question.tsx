@@ -94,27 +94,50 @@ const Question: React.FC<QuestionProps> = ({
               const { backgroundColor, borderColor, color, hover } =
                 getColorStyle(index);
               return (
-                <button
-                  key={index}
-                  onClick={() => handleButtonClick(index)}
-                  className={`${getSizeClass(
-                    index
-                  )} rounded-full border-4 flex items-center justify-center`}
-                  style={{
-                    backgroundColor,
-                    borderColor,
-                    color,
-                    transition: "background-color 0.3s",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.backgroundColor =
-                      hover;
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.backgroundColor =
-                      selectedIndex === index ? backgroundColor : "transparent";
-                  }}
-                />
+                <>
+                  <div className="relative">
+                    <button
+                      key={index}
+                      onClick={() => handleButtonClick(index)}
+                      className={`${getSizeClass(
+                        index
+                      )} rounded-full border-4 flex items-center justify-center`}
+                      style={{
+                        backgroundColor,
+                        borderColor,
+                        color,
+                        transition: "background-color 0.3s",
+                      }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLElement).style.backgroundColor =
+                          hover;
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLElement).style.backgroundColor =
+                          selectedIndex === index
+                            ? backgroundColor
+                            : "transparent";
+                      }}
+                    />
+
+                    {index === 0 && (
+                      <h1
+                        className="sm:hidden block text-md sm:text-3xl font-medium tracking-wider absolute"
+                        style={{ color: colors.disagree, fontFamily: "lora" }}
+                      >
+                        Disagree
+                      </h1>
+                    )}
+                    {index === 4 && (
+                      <h1
+                        className="sm:hidden block text-lg sm:text-3xl font-medium tracking-wider absolute"
+                        style={{ color: colors.agree, fontFamily: "lora" }}
+                      >
+                        Agree
+                      </h1>
+                    )}
+                  </div>
+                </>
               );
             })}
           </div>
@@ -127,20 +150,7 @@ const Question: React.FC<QuestionProps> = ({
           </h1>
         </div>
       </div>
-      <div className="sm:hidden flex justify-between">
-        <h1
-          className="text-md sm:text-3xl font-medium tracking-wider"
-          style={{ color: colors.disagree, fontFamily: "lora" }}
-        >
-          Disagree
-        </h1>
-        <h1
-          className="text-lg sm:text-3xl font-medium tracking-wider"
-          style={{ color: colors.agree, fontFamily: "lora" }}
-        >
-          Agree
-        </h1>
-      </div>
+      {/* <div className="sm:hidden flex justify-between"></div> */}
     </div>
   );
 };
