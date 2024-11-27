@@ -3,6 +3,10 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
+const title = "MindSarthi : Big 5 Assisment";
+const smallDescription = "AI powered assisment of your personality";
+const largeDescription = "";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -16,8 +20,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "MindSarthi : Big 5 Assisment",
-  description: "AI powered assisment of your personality",
+  title: title,
+  description: smallDescription,
 };
 
 export default function RootLayout({
@@ -27,6 +31,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" href="/favicon/favicon.ico" />
+        <meta
+          name="keywords"
+          content="mental health support, anxiety management, depression treatment, mental wellness tips, therapy near me, stress relief techniques, counseling services, emotional well-being, mental health stigma, PTSD symptoms, cognitive behavioral therapy, mindfulness meditation, mental health awareness, bipolar disorder, schizophrenia care, self-care strategies, panic attacks, workplace mental health, mental health resources, therapy for teens, eating disorders, grief counseling, holistic mental health, ADHD treatment, psychotherapy, mental health in schools, seasonal affective disorder, mental health first aid, stress and anxiety, mental health apps, therapist online, mental health hotline, mental illness recovery, mental health advocacy, coping mechanisms, mental health workshops, social anxiety, mental health for parents, depression symptoms, mental health diet, PTSD therapy, mental health medication, mental health and exercise, mental health podcasts, mental health challenges, therapy for veterans, youth mental health, mental health statistics, psychological disorders, mental health blogs"
+        />
+        <meta name="author" content="MindSarthi Tech" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={smallDescription} />
+        <meta property="og:description" content={smallDescription} />
+        <meta property="og:image" content="https://example.com/og-image.jpg" />
+        <meta property="og:url" content="https://mindsarthi.com" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={smallDescription} />
+        <meta name="twitter:image" content="/favicon/favicon-32x32.png" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

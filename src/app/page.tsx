@@ -160,6 +160,7 @@ export default function Home() {
                 }`}
               >
                 <Question
+                  key={item.id}
                   question={item.question}
                   onAnswerSelect={(selectedIndex) =>
                     handleAnswerSelect(selectedIndex, item.id)

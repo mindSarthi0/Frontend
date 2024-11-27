@@ -94,10 +94,9 @@ const Question: React.FC<QuestionProps> = ({
               const { backgroundColor, borderColor, color, hover } =
                 getColorStyle(index);
               return (
-                <>
-                  <div className="relative">
+                <div key={index+""+_}>
+                  <div className="relative" >
                     <button
-                      key={index}
                       onClick={() => handleButtonClick(index)}
                       className={`${getSizeClass(
                         index
@@ -137,7 +136,7 @@ const Question: React.FC<QuestionProps> = ({
                       </h1>
                     )}
                   </div>
-                </>
+                </div>
               );
             })}
           </div>
