@@ -14,6 +14,7 @@ import Main from "./components/Main";
 import ComponentLoader from "./components/ComponentLoader";
 import Loader from "./components/Loader";
 import PillButton from "./components/PillButton";
+import { apiCaller } from "./network";
 
 interface Question {
   id: number;
@@ -47,9 +48,11 @@ export default function Home() {
   useEffect(() => {
     const getQuestions = async () => {
       try {
-        const response = await fetch(BACKEND_API + "/questions");
-        const data = await response.json();
-        setQuestions(data);
+        const response = await apiCaller({
+          method: "GET",
+          path: "/questions",
+        });
+        setQuestions(response);
         setQuestionsLoading(false);
       } catch (error) {
         console.error("Error fetching questions:", error);

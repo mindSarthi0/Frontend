@@ -10,7 +10,7 @@
   --color-accent: #f5f8fa;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
@@ -18,7 +18,7 @@
     --color-secondary: #14171a;
     --color-accent: #f5f8fa;
   }
-}
+} */
 
 body {
   color: var(--foreground);

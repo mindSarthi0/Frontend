@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import PillButton from "./PillButton";
-import { BACKEND_API } from "../data";
+import { BACKEND_API, TEMP_TOKEN } from "../data";
+import { apiCaller } from "../network";
 
 interface Answers {
   id: number;
@@ -96,29 +97,17 @@ const ContactForm: React.FC<ContactProps> = ({
     if (!validate()) {
       return false;
     }
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
 
     const finalPayload = {
       ...inputData,
       answers: answers,
     };
 
-    const raw = JSON.stringify(finalPayload);
-
-    const requestOptions = {
+    apiCaller({
       method: "POST",
-      headers: myHeaders,
-      body: raw,
-    };
-
-    fetch(`${BACKEND_API as string}/submit`, requestOptions)
-      .then(async (response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw await response.json();
-      })
+      path: "/submit",
+      body: finalPayload,
+    })
       .then((result) => {
         console.log("Success:", result);
         const paymentLink = result.paymentLink;
@@ -127,7 +116,6 @@ const ContactForm: React.FC<ContactProps> = ({
       .catch(() => {
         onFailed();
       });
-    // Your logic for handling the button click goes here
   };
 
   return (
