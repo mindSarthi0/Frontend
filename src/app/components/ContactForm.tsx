@@ -1,6 +1,5 @@
 import { ChangeEvent, useState } from "react";
 import PillButton from "./PillButton";
-import { BACKEND_API, TEMP_TOKEN } from "../data";
 import { apiCaller } from "../network";
 
 interface Answers {

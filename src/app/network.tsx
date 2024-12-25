@@ -3,7 +3,7 @@ import { BACKEND_API, TEMP_TOKEN } from "./data";
 interface ApiCallerParams {
   method: string;
   path: string;
-  body?: any;
+  body?: unknown;
   additionalHeaders?: Record<string, string>;
 }
 

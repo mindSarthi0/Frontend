@@ -8,7 +8,6 @@ import ContactProps from "./components/ContactForm";
 import Question from "./components/Question";
 import Footer from "./components/Footer";
 import { Answers } from "./interface";
-import { BACKEND_API } from "./data";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import ComponentLoader from "./components/ComponentLoader";

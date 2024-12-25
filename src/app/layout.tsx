@@ -5,7 +5,6 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 
 const title = "MindSarthi : Big 5 Assisment";
 const smallDescription = "AI powered assisment of your personality";
-const largeDescription = "";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
