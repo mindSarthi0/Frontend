@@ -2,7 +2,7 @@
 
 import PaymentStatus from "./components/PaymentStatus";
 import React, { Suspense } from "react";
-import Header from "../components/Header";
+import { Header } from "../components/Header";
 import Footer from "../components/Footer";
 
 export default function PaymentStatusPage() {

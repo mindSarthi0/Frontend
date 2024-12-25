@@ -1,13 +1,14 @@
 // page.tsx
 
 import React from "react";
-// import Header from "./components/Header";
+import { Header } from "../components/Header";
 import Footer from "../components/Footer";
 import Image from "next/image";
 
 const TermsAndConditions = () => {
   return (
     <div className="bg-white p-6 max-w-md mx-auto my-8 rounded-lg shadow-md">
+      <Header title="Terms and Conditions" />
       <h2 className="font-semibold text-lg">Terms and Conditions</h2>
       <p className="text-sm text-gray-700 mb-4 text-center">
         By accessing our website and using our services, you agree to the

@@ -8,7 +8,7 @@ import ContactProps from "./components/ContactForm";
 import Question from "./components/Question";
 import Footer from "./components/Footer";
 import { Answers } from "./interface";
-import Header from "./components/Header";
+import { Header } from "./components/Header";
 import Main from "./components/Main";
 import ComponentLoader from "./components/ComponentLoader";
 import Loader from "./components/Loader";
@@ -178,12 +178,6 @@ export default function Home() {
               </div>
             ))}
             <div className="flex justify-center">
-              {/* <button
-                className="bg-[#0066FF] text-white px-8 py-4 rounded-lg"
-                onClick={onClickHandler}
-              >
-                Submit
-              </button> */}
               <PillButton onClick={onClickHandler} className="px-8 py-4">
                 <h1 className=" text-2xl">Next</h1>
               </PillButton>

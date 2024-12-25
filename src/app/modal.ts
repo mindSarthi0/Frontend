@@ -1,10 +1,10 @@
-interface Subdomain {
+export interface Subdomain {
   name: string;
   score: number;
   intensity: string;
 }
 
-interface Domain {
+export interface Domain {
   id: string;
   created_at: string;
   updated_at: string;
@@ -18,23 +18,56 @@ interface Domain {
   generatedContent: Record<string, unknown>;
 }
 
-interface GeneratedContent {
-  breaf_insights: string;
-  carrer_academic: string;
-  insights: string;
-  relationship: string;
-}
 
-interface AiReport {
+
+export interface AiReport {
   id: string;
   created_at: string;
   updated_at: string;
   userId: string;
   testId: string;
-  generatedContent: GeneratedContent;
+  generatedContent: string;
 }
 
 export interface ReportResponse {
   report: Domain[];
   aiReport: AiReport[];
+  name: string;
+}
+
+
+
+// Updating the PersonalityResult interface to match exact domain keys
+export interface PersonalityResult {
+  [key: string]: DomainScore;
+}
+
+export interface DomainScore {
+  domain: string;
+  score: {
+    value: number;
+    total: number;
+    level: string;
+  };
+  subdomains: SubdomainScore[];
+}
+
+export interface SubdomainScore {
+  name: string;
+  score: 'Low' | 'Average' | 'High';
+}
+
+export interface NavItem {
+  label: string;
+  target: string;
+}
+
+export interface PageNavConfig {
+  hasQuickNav: boolean;
+  isInternalPage: boolean;
+  navItems: NavItem[];
+}
+
+export interface NavConfig {
+  [key: string]: PageNavConfig;
 }

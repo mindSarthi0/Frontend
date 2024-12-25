@@ -1,55 +1,101 @@
-"use client"; // This allows client-side code such as useState
-
-// import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-
+"use client";
+import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { QuickNav } from "./shared/QuickNav";
+import { NavConfig, NavItem } from "@/app/modal";
+import { BackButton } from "./shared/BackButton";
+import { usePathname } from "next/navigation";
 interface HeaderProps {
-  showDropShadow?: boolean;
-  onBackClick?: () => void;
   title?: string;
-  onTitleClick?: () => void;
-  rightMenu?: React.ReactNode;
 }
 
-const Header: React.FC<HeaderProps> = ({
-  showDropShadow = true,
-  title,
-  onTitleClick,
-}) => {
-  return (
-    <header
-      className={`fixed bg-primary  w-full z-50 flex ${
-        showDropShadow ? "shadow-md" : ""
-      } transition-shadow duration-300`}
-    >
-      <div className="flex items-center">
-        <div className="flex justify-between items-center h-[60px] px-4 sm:px-8">
-          {/* Logo Section */}
-          <Link href="/">
-            <Image
-              src="/logo_1.png"
-              width={40}
-              height={42}
-              alt="mind sarthi logo"
-              priority
-            />
-          </Link>
-        </div>
+interface PageNavigationConfig {
+  hasQuickNav: boolean;
+  navItems: NavItem[];
+  isInternalPage: boolean;
+}
 
-        {title && (
-          <h1
-            onClick={onTitleClick}
-            className={`ml-4 text-lg font-semibold text-white ${
-              onTitleClick ? "cursor-pointer" : ""
-            }`}
-          >
-            {title}
-          </h1>
-        )}
-      </div>
-    </header>
-  );
+export const usePageNavigation = (): PageNavigationConfig => {
+  const pathname = usePathname();
+  if (typeof window !== "undefined") {
+    const path = pathname?.split("/")[1] || "report"; // Default to results page
+    return (
+      navigationConfig[path] || {
+        hasQuickNav: false,
+        navItems: [],
+        isInternalPage: false,
+      }
+    );
+  }
+  return { hasQuickNav: false, navItems: [], isInternalPage: false };
 };
 
-export default Header;
+export const navigationConfig: NavConfig = {
+  // Pages with quick navigation
+  report: {
+    hasQuickNav: true,
+    isInternalPage: false,
+    navItems: [
+      { label: "Personality Domains", target: "domains" },
+      { label: "Career Implications", target: "career" },
+      { label: "Academic Potential", target: "academic" },
+      { label: "Relationship Dynamics", target: "relationship" },
+      { label: "Path to Fulfillment", target: "fulfillment" },
+    ],
+  },
+  // Pages without quick navigation
+  legal: {
+    hasQuickNav: false,
+    isInternalPage: true,
+    navItems: [],
+  },
+};
+
+export const Header: React.FC<HeaderProps> = ({}) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { hasQuickNav, navItems, isInternalPage } = usePageNavigation();
+
+  return (
+    <nav className="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            {isInternalPage && <BackButton />}
+            <img src={"/logo.png"} alt="logo_1.png" className="h-8 w-8" />
+            <div>
+              <h1 className="text-xl font-bold text-gray-900">Mind Sarthi</h1>
+              <p className="text-sm text-gray-600 hidden sm:block"></p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-6">
+            {hasQuickNav && (
+              <>
+                <button
+                  className="lg:hidden"
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
+                  {isMenuOpen ? (
+                    <X className="h-6 w-6 text-gray-600" />
+                  ) : (
+                    <Menu className="h-6 w-6 text-gray-600" />
+                  )}
+                </button>
+
+                <div className="hidden lg:block">
+                  <QuickNav items={navItems} isMobile={false} />
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+
+        {hasQuickNav && isMenuOpen && (
+          <div className="lg:hidden py-4 border-t border-gray-100">
+            <QuickNav items={navItems} isMobile />
+          </div>
+        )}
+      </div>
+    </nav>
+  );
+};

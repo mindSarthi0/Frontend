@@ -5,7 +5,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
-import Header from "../components/Header";
+import { Header } from "../components/Header";
 import Footer from "../components/Footer";
 
 const LegalPage = dynamic(() =>
