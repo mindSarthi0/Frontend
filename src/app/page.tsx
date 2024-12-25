@@ -1,5 +1,3 @@
-// page.tsx
-
 "use client";
 import Popup from "./components/Popup";
 import Section from "./components/Section";
@@ -14,6 +12,7 @@ import ComponentLoader from "./components/ComponentLoader";
 import Loader from "./components/Loader";
 import PillButton from "./components/PillButton";
 import { apiCaller } from "./network";
+import ShuffledQuestions from './ShuffledQuestions';
 
 interface Question {
   id: number;
@@ -44,6 +43,7 @@ export default function Home() {
   // Create refs for each question
   const questionRefs = useRef<Array<HTMLDivElement | null>>([]);
 
+  // Fetch questions from API and set them to state
   useEffect(() => {
     const getQuestions = async () => {
       try {
@@ -95,7 +95,7 @@ export default function Home() {
 
   // Calculate progress based on the number of answered questions
   const answeredQuestionsCount = Object.keys(answers).length;
-  const progress = (answeredQuestionsCount / questions.length) * 100;
+  const progress = questions.length ? (answeredQuestionsCount / questions.length) * 100 : 0;
 
   const isLoading = questionsLoading;
 
@@ -103,6 +103,7 @@ export default function Home() {
     <div className="">
       <Header title="BIG 5 Personality Assessment" />
 
+      {/* Popup for user form */}
       <Popup
         isOpen={popupUserForm.isOpen}
         onClose={() => setPopupUserForm({ ...popupUserForm, isOpen: false })}
@@ -119,12 +120,14 @@ export default function Home() {
               body: "Redirecting to payment page...",
             });
           
-            // Redirect instead of opening a new window
+            // Redirect to payment page
             window.location.href = paymentLink;
           }}
           onFailed={() => alert("Failed to submit: Check logs")}
         />
       </Popup>
+
+      {/* Popup for messages */}
       <Popup
         isOpen={popupData.isOpen}
         onClose={() => setPopupDate({ ...popupData, isOpen: false })}
@@ -133,8 +136,9 @@ export default function Home() {
         <h1 className={popupData.titleClassName}>{popupData.title}</h1>
         <p>{popupData.body}</p>
       </Popup>
+
       <Main>
-        {/* Progress Bar at the bottom of the screen */}
+        {/* Progress Bar at the top of the screen */}
         <div className="w-full fixed top-[64px] left-0 bg-gray-200">
           <div
             className="h-2 bg-green-500 transition-all duration-300"
@@ -150,32 +154,39 @@ export default function Home() {
           }
         >
           <Section withMaxWidth>
-            {questions.map((item: Question, index: number) => (
-              <div
-                key={item.id}
-                ref={(el) => {
-                  questionRefs.current[index] = el;
-                }} // Assign ref to each question
-                className={`mb-8 ${
-                  index !== currentQuestionIndex ? "blur-sm" : ""
-                }`}
-              >
-                <Question
-                  key={item.id}
-                  question={item.question}
-                  onAnswerSelect={(selectedIndex) =>
-                    handleAnswerSelect(selectedIndex, item.id)
-                  }
-                  totalQuestions={questions.length}
-                  currentQuestion={index + 1}
-                />
+            {/* Use the ShuffledQuestions component to shuffle and render questions */}
+            <ShuffledQuestions
+              questions={questions}
+              render={(shuffledQuestions) =>
+                shuffledQuestions.map((item: Question, index: number) => (
+                  <div
+                    key={item.id}
+                    ref={(el) => {
+                      questionRefs.current[index] = el;
+                    }} // Assign ref to each question
+                    className={`mb-8 ${
+                      index !== currentQuestionIndex ? "blur-sm" : ""
+                    }`}
+                  >
+                    <Question
+                      key={item.id}
+                      question={item.question}
+                      onAnswerSelect={(selectedIndex) =>
+                        handleAnswerSelect(selectedIndex, item.id)
+                      }
+                      totalQuestions={shuffledQuestions.length}
+                      currentQuestion={index + 1}
+                    />
 
-                {/* Fine Line to separate questions */}
-                {index !== questions.length - 1 && (
-                  <hr className="my-8 border-gray-300" /> // Add this line
-                )}
-              </div>
-            ))}
+                    {/* Fine Line to separate questions */}
+                    {index !== shuffledQuestions.length - 1 && (
+                      <hr className="my-8 border-gray-300" /> // Separator line
+                    )}
+                  </div>
+                ))
+              }
+            />
+            {/* Next button */}
             <div className="flex justify-center">
               <PillButton onClick={onClickHandler} className="px-8 py-4">
                 <h1 className=" text-2xl">Next</h1>
