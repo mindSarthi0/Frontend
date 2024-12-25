@@ -67,7 +67,7 @@ export default function Big5Page({ params }: { params: { slug: string } }) {
             {reportLoading ? (
               <>
                 <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-                  {"Analyzing your responses. Please wait 30 seconds."}
+                  {"Analyzing your test results. Please hold on for a moment."}
                 </p>
                 <p className="text-[12px] text-gray-600 max-w-2xl mx-auto">
                   Powered by MindSarthi AI
