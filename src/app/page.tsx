@@ -116,12 +116,11 @@ export default function Home() {
               isOpen: true,
               title: "Please wait!",
               titleClassName: "text-3xl",
-              body: "Please do not refresh this window. Your payment is being processed.",
+              body: "Redirecting to payment page...",
             });
-
-            // Open this of Iframe
-            window.open(paymentLink, "_blank");
-            // setPaymentPopup({ isOpen: true, initialPaymentLink: paymentLink });
+          
+            // Redirect instead of opening a new window
+            window.location.href = paymentLink;
           }}
           onFailed={() => alert("Failed to submit: Check logs")}
         />
