@@ -18,7 +18,7 @@ interface PageNavigationConfig {
 export const usePageNavigation = (): PageNavigationConfig => {
   const pathname = usePathname();
   if (typeof window !== "undefined") {
-    const path = pathname?.split("/")[1] || "report"; // Default to results page
+    const path = pathname?.split("/")[1] || "home"; // Default to results page
     return (
       navigationConfig[path] || {
         hasQuickNav: false,
@@ -47,6 +47,11 @@ export const navigationConfig: NavConfig = {
   legal: {
     hasQuickNav: false,
     isInternalPage: true,
+    navItems: [],
+  },
+  home: {
+    hasQuickNav: false,
+    isInternalPage: false,
     navItems: [],
   },
 };
