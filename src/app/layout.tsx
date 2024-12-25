@@ -3,8 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
-const title = "MindSarthi : Big 5 Assisment";
-const smallDescription = "AI powered assisment of your personality";
+const title = "MindSarthi : Big 5 Assessment";
+const smallDescription = "AI powered assessment of your personality";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
