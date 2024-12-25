@@ -4,7 +4,7 @@ import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 const title = "MindSarthi : Big 5 Assessment";
-const smallDescription = "AI powered assessment of your personality";
+const smallDescription = "Powered by MindSarthi AI";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
