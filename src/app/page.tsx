@@ -12,7 +12,7 @@ import ComponentLoader from "./components/ComponentLoader";
 import Loader from "./components/Loader";
 import PillButton from "./components/PillButton";
 import { apiCaller } from "./network";
-import ShuffledQuestions from './ShuffledQuestions';
+import ShuffledQuestions from "./ShuffledQuestions";
 
 interface Question {
   id: number;
@@ -95,7 +95,9 @@ export default function Home() {
 
   // Calculate progress based on the number of answered questions
   const answeredQuestionsCount = Object.keys(answers).length;
-  const progress = questions.length ? (answeredQuestionsCount / questions.length) * 100 : 0;
+  const progress = questions.length
+    ? (answeredQuestionsCount / questions.length) * 100
+    : 0;
 
   const isLoading = questionsLoading;
 
@@ -119,7 +121,7 @@ export default function Home() {
               titleClassName: "text-3xl",
               body: "Redirecting to payment page...",
             });
-          
+
             // Redirect to payment page
             window.location.href = paymentLink;
           }}
