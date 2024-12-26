@@ -10,7 +10,7 @@ export default function Home() {
         <h1>
           <strong>App Status</strong>
         </h1>
-        <p>App Version: 0.1.2</p>
+        <p>App Version: 0.1.3</p>
       </div>
 
       <Footer />
