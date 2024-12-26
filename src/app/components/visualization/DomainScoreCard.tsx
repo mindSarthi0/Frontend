@@ -121,7 +121,9 @@ export const DomainScoreCard: React.FC<DomainScoreCardProps> = ({
 
       {isExpanded && (
         <div className="mt-4 space-y-3 pt-4 border-t border-gray-100">
-          <h4 className="font-medium text-gray-700 mb-2">Subdomains</h4>
+          <h4 className="font-medium text-gray-700 mb-2">
+            <strong>Subdomains</strong>
+          </h4>
           {subdomains
             .sort((a: { intensity: string }, b: { intensity: string }) => {
               const intensityOrder = {
