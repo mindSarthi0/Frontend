@@ -10,7 +10,7 @@ const subdomainDescriptions: Record<string, string> = {
   Anxiety: "Tendency to experience worry, fear, and tension",
   Anger: "Tendency to experience frustration and bitterness",
   Depression: "Tendency to experience sadness and hopelessness",
-  Self_consciousness: "Sensitivity to criticism and social pressure",
+  "Self-consciousness": "Sensitivity to criticism and social pressure",
   Immoderation: "Tendency to act on impulses and urges",
   Vulnerability: "Ability to handle stress and pressure",
 
@@ -18,13 +18,13 @@ const subdomainDescriptions: Record<string, string> = {
   Friendliness: "Interest in and friendliness towards others",
   Gregariousness: "Preference for company and social interaction",
   Assertiveness: "Social ascendancy and forcefulness of expression",
-  Activity_Level: "Pace of living and energy level",
-  Excitement_Seeking: "Need for environmental stimulation",
+  "Activity Level": "Pace of living and energy level",
+  "Excitement Seeking": "Need for environmental stimulation",
   Cheerfulness: "Tendency to experience positive emotions",
 
   // Openness
   Imagination: "Openness to fantasy and creative thinking",
-  Artistic_Interests: "Appreciation for art and beauty",
+  "Artistic Interests": "Appreciation for art and beauty",
   Emotionality: "Awareness of own and others' feelings",
   Adventurousness: "Willingness to try new activities",
   Intellect: "Intellectual curiosity and interest",
@@ -39,11 +39,11 @@ const subdomainDescriptions: Record<string, string> = {
   Sympathy: "Tenderness for others",
 
   // Conscientiousness
-  Self_Efficacy: "Belief in one's own competence",
+  "Self Efficacy": "Belief in one's own competence",
   Orderliness: "Personal organization and neatness",
   Dutifulness: "Emphasis placed on fulfilling obligations",
-  Achievement_Striving: "Need for personal achievement",
-  Self_Discipline: "Capacity to begin and complete tasks",
+  "Achievement Striving": "Need for personal achievement",
+  "Self Discipline": "Capacity to begin and complete tasks",
   Cautiousness: "Tendency to think things through",
 };
 
