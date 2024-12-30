@@ -112,9 +112,11 @@ export const DomainScoreCard: React.FC<DomainScoreCardProps> = ({
 
         {description && (
           <p className="text-sm text-gray-600 mt-2">
-            {level.toLowerCase() === "high"
-              ? description.highDescription
-              : description.lowDescription}
+            {level.toLowerCase() === 'high' ? description.highDescription : 
+             level.toLowerCase() === 'above average' ? description.aboveAverageDescription :
+             level.toLowerCase() === 'average' ? description.averageDescription :
+             level.toLowerCase() === 'below average' ? description.belowAverageDescription :
+             description.lowDescription}
           </p>
         )}
       </div>
